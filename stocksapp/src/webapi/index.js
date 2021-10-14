@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const sql = require('mssql');
 
 app.use(express.json());
 app.use(cors());
@@ -13,6 +14,18 @@ app.post('/login', (req,res,next)=>{
 
     console.log(name);
     console.log(pass);
+})
+
+app.post('/signup',(req,res,next)=>{
+    const name = req.body.txtName.trim();
+    const email = req.body.txtEmail.trim();
+    const pass = parseInt(req.body.txtPass.trim());
+
+    console.log(name);
+    console.log(email);
+    console.log(pass);
+
+    
 })
 
 

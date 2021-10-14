@@ -1,0 +1,30 @@
+.homepage{
+    margin-top: 25%;
+    width: 20%;
+    text-align: center;
+    background-color: black;
+    height: 100%;
+    margin-left: -10px;
+}
+
+.login{
+    
+    float: right;
+    text-align: right;
+    margin-right: 25%;
+    height: 100%;
+    width: 100%;
+    
+    margin-bottom: 25px;
+}
+
+.main{
+    margin-top: -15px;
+    
+    width: 30%;
+    text-align: center;
+    height: 100%;
+    margin-left: 35%;
+    float: left;
+    background-color: rgb(0, 0, 0);
+}
