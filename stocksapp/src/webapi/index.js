@@ -3,12 +3,13 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const sql = require('mssql');
+const yup = require('yup');
 
 app.use(express.json());
 app.use(cors());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
-app.post('/login', (req,res,next)=>{
+app.post('/login', (req, res, next) => {
     const name = req.body.txtName;
     const pass = req.body.txtPassword;
 
@@ -16,19 +17,32 @@ app.post('/login', (req,res,next)=>{
     console.log(pass);
 })
 
-app.post('/signup',(req,res,next)=>{
-    const name = req.body.txtName.trim();
-    const email = req.body.txtEmail.trim();
-    const pass = parseInt(req.body.txtPass.trim());
+app.post('/signup', (req, res, next) => {
 
-    console.log(name);
-    console.log(email);
-    console.log(pass);
-
+    var a = 0;
+    const yupuser = yup.object().shape({
+        txtName: yup.string().required(),
+        txtEmail: yup.string().email().required(),
+        txtPass: yup.number().required().positive()
+    });
     
-})
+    console.log(req.body.txtPass);
+    validate();
+    async function validate(){
+        if(!(await yupuser.isValid(req.body))){
+            a = 1;
+            console.log(a);
+            res.json({message: a});
+        }else{
+            a = 2;
+            console.log(a);
+            res.json({message: a})
+        }
+    }
+
+});
 
 
-app.listen(5000, ()=>{
+app.listen(5000, () => {
     console.log('The webserver is running');
 })

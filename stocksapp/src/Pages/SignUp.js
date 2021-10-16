@@ -12,7 +12,11 @@ function SignUp() {
     function formSubmit(event){
         event.preventDefault();
         axios.post('http://localhost:5000/signup', user).then(response =>{
-            
+            if(response.data.message == 1){
+                alert('Erro no cadastro do usuário! Tente novamente');
+            }else if(response.data.message == 2){
+                alert('Usuário cadastro com sucesso!');
+            }
         })
     }
 
