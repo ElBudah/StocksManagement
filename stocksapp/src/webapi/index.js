@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const sql = require('mssql');
 const yup = require('yup');
+const routes = require('./routes/routes');
 
 app.use(express.json());
 app.use(cors());
@@ -17,7 +18,10 @@ app.post('/login', (req, res, next) => {
     console.log(pass);
 })
 
-app.post('/signup', (req, res, next) => {
+
+app.use('/signup', routes);
+
+/* app.post('/signup', (req, res, next) => {
 
     var a = 0;
     const yupuser = yup.object().shape({
@@ -40,7 +44,7 @@ app.post('/signup', (req, res, next) => {
         }
     }
 
-});
+}); */
 
 
 app.listen(5000, () => {
