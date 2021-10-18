@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import SubmitButton from "../Components/SubmitButton";
 
 function SignUp() {
@@ -40,8 +41,10 @@ function SignUp() {
                 Password: 
                 <input type="password" id="txtPass" name="txtPass" className="input" required autoComplete="off" onChange={inputChange}></input>
                 <p></p>
-                <input type="submit" value="Submit"></input>
+                <input type="submit" className="submit" value="Submit"></input>
             </form>
+            <p></p>
+            <Link to="/"><button>Return</button></Link>
         </div>
     )
 }

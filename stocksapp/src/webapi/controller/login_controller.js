@@ -31,13 +31,34 @@ exports.post = (req, res, next) => {
         } else {
             a = 2;
             console.log(a);
-            sql.connect(config, function(err){
+            sql.connect(config, function (err) {
 
-                if(err) console.log(err);
+                if (err) console.log(err);
                 let sqlRequest = new sql.Request();
-                let sqlQuery = "Insert into Users values ('"+req.body.txtName+"','"+req.body.txtEmail+"', "+req.body.txtPass+")";
-                sqlRequest.query(sqlQuery, function(err,data){
-                    sql.close();
+                let sqlQuery = "Select * from Users";
+                sqlRequest.query(sqlQuery, function (err, data) {
+                    console.log(data);
+
+                    var Nomes = data.map((item)=>{
+                        return item.Nome
+                    });
+                    console.log(Nomes);
+
+                    var Emails = data.map((item)=>{
+                        return item.Email
+                    })
+                    console.log(Emails);
+
+                    var Senha = data.map((item)=>{
+                        return item.Pass
+                    })
+                    console.log(Senha);
+
+                    var IDs = data.map((item)=>{
+                        return item.UserID
+                    })
+                    console.log(IDs);
+
                 });
             });
             res.json({ message: a })

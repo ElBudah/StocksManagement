@@ -6,14 +6,14 @@ import '../styles/texts.css';
 
 function Logged() {
     const [user, Setuser] = useState({
-        txtName: "",
-        txtEmail: "",
-        txtPassword: 0,
+        txtName: '',
+        txtEmail: '',
+        txtPass: 0,
     })
 
     function formSubmit(event) {
         event.preventDefault();
-        axios.post('http://localhost:5000/login', user).then(response => {
+        axios.post('http://localhost:5000/signin', user).then(response => {
             if (response.data == 0) {
 
             } else {
@@ -45,12 +45,10 @@ function Logged() {
                         <input id="txtPass" type="password" name="txtPass" autoComplete="off" required onChange={inputChange}></input>
                     </h2>
 
+                    <input type="submit" className="submit" value="Enter" />
 
                 </form>
 
-            </div>
-            <div>
-                <input type="submit" className="submit" value="Enter" />
             </div>
 
         </div>
