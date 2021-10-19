@@ -21,47 +21,53 @@ exports.post = (req, res, next) => {
         txtPass: yup.number().required().positive().integer()
     });
 
-    console.log(req.body.txtPass);
+    
     validate();
     async function validate() {
         if (!(await yupuser.isValid(req.body))) {
             a = 1;
-            console.log(a);
             res.json({ message: a });
         } else {
             a = 2;
-            console.log(a);
             sql.connect(config, function (err) {
 
                 if (err) console.log(err);
                 let sqlRequest = new sql.Request();
                 let sqlQuery = "Select * from Users";
                 sqlRequest.query(sqlQuery, function (err, data) {
-                    console.log(data);
 
-                    var Nomes = data.map((item)=>{
+                    var Nomes = data.map((item) => {
                         return item.Nome
                     });
-                    console.log(Nomes);
 
-                    var Emails = data.map((item)=>{
+                    var Emails = data.map((item) => {
                         return item.Email
                     })
-                    console.log(Emails);
 
-                    var Senha = data.map((item)=>{
+                    var Senha = data.map((item) => {
                         return item.Pass
                     })
-                    console.log(Senha);
 
-                    var IDs = data.map((item)=>{
+                    var IDs = data.map((item) => {
                         return item.UserID
                     })
-                    console.log(IDs);
+                   
+                    var auth = false;
+                    for (var i = 0; i < Nomes.length; i++) {
+                        if (Nomes[i] == req.body.txtName && Senha[i] == parseInt(req.body.txtPass) && Emails[i] == req.body.txtEmail) {
+                            auth = true;
+                            break;
+                        } else {
+                            auth = false;
+                        }
+
+                    }
+
+                    res.send(auth);
 
                 });
             });
-            res.json({ message: a })
+
         }
     }
 

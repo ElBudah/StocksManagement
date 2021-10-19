@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Link} from 'react-router-dom';
 import axios from "axios";
 import '../styles/buttons.css';
 import '../styles/divs.css';
@@ -14,10 +15,10 @@ function Logged() {
     function formSubmit(event) {
         event.preventDefault();
         axios.post('http://localhost:5000/signin', user).then(response => {
-            if (response.data == 0) {
-
-            } else {
-
+            if(response.data == true){
+                window.location = '/signin';
+            }else{
+                alert('Usuário inválido. Revise suas credenciais')
             }
         })
 
@@ -45,11 +46,12 @@ function Logged() {
                         <input id="txtPass" type="password" name="txtPass" autoComplete="off" required onChange={inputChange}></input>
                     </h2>
 
-                    <input type="submit" className="submit" value="Enter" />
+                    <Link to="/logged"><input type="submit" className="submit" value="Enter" /></Link>
 
                 </form>
 
             </div>
+            <Link to="/"><button>Return</button></Link>
 
         </div>
     )
