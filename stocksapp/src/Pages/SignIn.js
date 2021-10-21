@@ -15,11 +15,12 @@ function Logged() {
     function formSubmit(event) {
         event.preventDefault();
         axios.post('http://localhost:5000/signin', user).then(response => {
-            if(response.data == true){
-                window.location = '/signin';
+            if(response.data !== 'error'){
+                window.localStorage.setItem('token',1);
             }else{
-                alert('Usuário inválido. Revise suas credenciais')
+                alert('Credenciais inválidas');
             }
+            window.location = '/logged';
         })
 
     }
@@ -46,7 +47,7 @@ function Logged() {
                         <input id="txtPass" type="password" name="txtPass" autoComplete="off" required onChange={inputChange}></input>
                     </h2>
 
-                    <Link to="/logged"><input type="submit" className="submit" value="Enter" /></Link>
+                    <input type="submit" className="submit" value="Enter" />
 
                 </form>
 

@@ -31,12 +31,13 @@ exports.post = (req, res, next) => {
         } else {
             a = 2;
             console.log(a);
-            sql.connect(config, function(err){
-
-                if(err) console.log(err);
+            sql.connect(config, function (err) {
+                console.log(req.body.txtName);
+                if (err) console.log(err);
                 let sqlRequest = new sql.Request();
-                let sqlQuery = "Insert into Users values ('"+req.body.txtName+"','"+req.body.txtEmail+"', "+req.body.txtPass+")";
-                sqlRequest.query(sqlQuery, function(err,data){
+                let sqlQuery = "Insert into Users values ('" + req.body.txtName + "','" + req.body.txtEmail + "', " + req.body.txtPass + ")";
+                sqlRequest.query(sqlQuery, function (err, data) {
+                    console.log(data);
                     sql.close();
                 });
             });
@@ -44,4 +45,17 @@ exports.post = (req, res, next) => {
         }
     }
 
+}
+
+exports.get = (req, res, next) => {
+    sql.connect(config, (err) => {
+        if(err)console.log(err);
+        let sqlRequest = new sql.Request();
+        let sqlQuery = 'Select * from Stocks';
+        sqlRequest.query(sqlQuery, (err,data)=>{
+            console.log(data);
+            res.send(data);
+        })
+
+    })
 }
