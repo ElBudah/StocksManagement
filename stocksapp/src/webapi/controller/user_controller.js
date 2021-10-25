@@ -54,7 +54,7 @@ exports.get = (req, res, next) => {
         let sqlQuery = 'Select * from Stocks';
         sqlRequest.query(sqlQuery, (err,data)=>{
 
-            var Ativo = data.map((item)=>{
+            /* var Ativo = data.map((item)=>{
                 return item.Ativo;
             })
 
@@ -80,13 +80,9 @@ exports.get = (req, res, next) => {
 
             var ProfitPercentage = data.map((item)=>{
                 return item.ProfitPercentage;
-            })
-
-            var data = []
-            for(var i = 0; i < Ativo.length; i++){
-                data.push(Ativo[i]+" "+Quantity[i]+PriceBuy[i]+PriceSell[i]+QuantitySell[i]+ProfitNeat[i]+ProfitPercentage[i]);
-            }
-
+            }) */
+            
+            
             console.log(data);
             res.send(data);
         })
