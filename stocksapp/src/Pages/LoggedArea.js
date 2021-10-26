@@ -4,7 +4,7 @@ import '../styles/divs.css';
 import axios from "axios";
 import Text from "../Components/Text";
 import SubmitButton from "../Components/SubmitButton";
-import { response } from "express";
+
 
 function LoggedArea() {
     const [stocks, setStocks] = useState([]);

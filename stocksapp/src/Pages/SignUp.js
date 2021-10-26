@@ -29,22 +29,31 @@ function SignUp() {
 
 
     return (
-        <div>
-            <h2>To create your account please enter your name, email and a password</h2>
+        <div className="menu">
+            <h3>To create your account please enter your name, email and a password</h3>
+            <div className="login">
+
+            
             <form onSubmit={formSubmit}>
-                Name:
+                
+                <h3>Name:
                 <input type="text" id="txtName" name="txtName" className="input" required autoComplete="off" onChange={inputChange}></input>
+                </h3>
                 <p></p>
-                Email:
+                <h3>Email:
                 <input type="email" id="txtEmail" name="txtEmail" className="input" required autoComplete="off" onChange={inputChange}></input>
+                </h3>
                 <p></p>
-                Password: 
+                <h3>Password: 
                 <input type="password" id="txtPass" name="txtPass" className="input" required autoComplete="off" onChange={inputChange}></input>
+                </h3>
                 <p></p>
                 <input type="submit" className="submit" value="Submit"></input>
             </form>
             <p></p>
             <Link to="/"><button>Return</button></Link>
+            </div>
+            
         </div>
     )
 }

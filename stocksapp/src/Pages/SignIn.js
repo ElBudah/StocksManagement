@@ -32,28 +32,27 @@ function Logged() {
     }
 
     return (
-        <div className="main">
-            <h2>To enter insert your credentials below: </h2>
+        <div className="menu">
+            <h3>To enter insert your credentials below: </h3>
             <div className="login">
 
                 <form onSubmit={formSubmit}>
-                    <h2>Name:
+                    <h3>Name:
                         <input id="txtName" name="txtName" autoComplete="off" required onChange={inputChange} />
-                    </h2>
-                    <h2>Email:
+                    </h3>
+                    <h3>Email:
                         <input id="txtEmail" type="email" name="txtEmail" autoComplete="off" required onChange={inputChange} />
-                    </h2>
-                    <h2>Password:
+                    </h3>
+                    <h3>Password:
                         <input id="txtPass" type="password" name="txtPass" autoComplete="off" required onChange={inputChange}></input>
-                    </h2>
+                    </h3>
 
                     <input type="submit" className="submit" value="Enter" />
 
                 </form>
-
+                <Link to="/"><button>Return</button></Link>
             </div>
-            <Link to="/"><button>Return</button></Link>
-
+            
         </div>
     )
 }
