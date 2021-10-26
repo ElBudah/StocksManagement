@@ -54,38 +54,21 @@ exports.get = (req, res, next) => {
         let sqlQuery = 'Select * from Stocks';
         sqlRequest.query(sqlQuery, (err,data)=>{
 
-            /* var Ativo = data.map((item)=>{
-                return item.Ativo;
-            })
-
-            var Quantity = data.map((item)=>{
-                return item.Quantity;
-            })
-
-            var PriceBuy = data.map((item)=>{
-                return item.PriceBuy;
-            })
-
-            var PriceSell = data.map((item)=>{
-                return item.PriceSell;
-            })
-
-            var QuantitySell = data.map((item)=>{
-                return item.QuantitySell;
-            })
-            
-            var ProfitNeat = data.map((item)=>{
-                return item.ProfitNeat;
-            })
-
-            var ProfitPercentage = data.map((item)=>{
-                return item.ProfitPercentage;
-            }) */
-            
-            
             console.log(data);
             res.send(data);
         })
 
+    })
+}
+
+exports.delete = (req,res,next)=>{
+    sql.connect(config, (err)=>{
+        if(err)console.log(err);
+        let sqlRequest = new sql.Request();
+        let sqlQuery = 'Delete from Stocks';
+        sqlRequest.query(sqlQuery, (err,data)=>{
+            console.log(data);
+            res.send(data);
+        })
     })
 }
