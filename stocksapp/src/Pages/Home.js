@@ -8,9 +8,6 @@ function Home() {
     return (
         <Fragment>
             <Menu></Menu>
-            <div className="photo">
-                <img  alt="bull"></img>
-            </div>
         </Fragment>
     )
 }

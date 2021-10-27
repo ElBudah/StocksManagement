@@ -1,18 +1,36 @@
 button{
-  margin-top: 10%;
+    margin-top: 30%;
     height: 45px;
-    border-radius: 0.3cm;
-    width: 100px;
+    width: 200px;
     border-color: red;
+    border-width: 0.5px;
     color: rgb(255, 255, 255);
     background-color: black;
   }
 
+.signin{
+  margin-top: 10%;
+  height: 45px;
+  width: 200px;
+  border-color: red;
+  border-width: 0.5px;
+  color: rgb(255, 255, 255);
+  background-color: black;
+}
+
+button:hover{
+  border-color: white;
+}
+
 input.submit{
-    height: 40px;
-    border-radius: 0.3cm;
-    width: 100px;
+    height: 45px;
+    border-width: 0.5px;
+    width: 200px;
     border-color: red;
     color: rgb(255, 255, 255);
     background-color: black;
+}
+
+input.submit:hover{
+  border-color: white;
 }

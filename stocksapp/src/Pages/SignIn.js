@@ -35,7 +35,6 @@ function Logged() {
         <div className="menu">
             <h3>To enter insert your credentials below: </h3>
             <div className="login">
-
                 <form onSubmit={formSubmit}>
                     <h3>Name:
                         <input id="txtName" name="txtName" autoComplete="off" required onChange={inputChange} />
@@ -46,11 +45,9 @@ function Logged() {
                     <h3>Password:
                         <input id="txtPass" type="password" name="txtPass" autoComplete="off" required onChange={inputChange}></input>
                     </h3>
-
                     <input type="submit" className="submit" value="Enter" />
-
                 </form>
-                <Link to="/"><button>Return</button></Link>
+                <Link to="/"><button className="signin">Return</button></Link>
             </div>
             
         </div>
