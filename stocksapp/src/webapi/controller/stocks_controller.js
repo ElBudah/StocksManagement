@@ -20,10 +20,12 @@ exports.post = (req, res) => {
         const PriceBuy = parseFloat(req.body.nmbPriceBuy);
         const PriceSell = parseFloat(req.body.nmbPriceSell);
         const QuantitySell = parseFloat(req.body.nmbQuantitySell);
+        const ProfitNeat = null;
+        const ProfitPercentage = null;
         console.log(PriceBuy);
 
         let sqlRequest = new sql.Request();
-        let sqlQuery = "Insert into Stocks values ('" + NewStock + "','" + Quantity + "','" + PriceBuy + "','" + PriceSell + "','" + QuantitySell + "')";
+        let sqlQuery = "Insert into Stocks values ('" + NewStock + "','" + Quantity + "','" + PriceBuy + "','" + PriceSell + "','" + QuantitySell + "',0,0)";
         sqlRequest.query(sqlQuery, (err, data) => {
 
             console.log("Inseriou");

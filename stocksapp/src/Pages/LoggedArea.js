@@ -4,92 +4,105 @@ import '../styles/divs.css';
 import axios from "axios";
 import Text from "../Components/Text";
 import SubmitButton from "../Components/SubmitButton";
+import { Fragment } from "react/cjs/react.production.min";
+import Menu from "../Components/Menu";
+import '../styles/table.css';
+import '../styles/texts.css';
 
 
 function LoggedArea() {
     const [stocks, setStocks] = useState([]);
-    
+
     function clear() {
         window.localStorage.clear();
     }
 
-    const clock = 1000000;
-    useEffect(() =>{
-        const id = setInterval(() =>{
-            axios.get('http://localhost:5000/logged/stocks').then(response =>{
+    const clock = 2000;
+    useEffect(() => {
+        const id = setInterval(() => {
+            axios.get('http://localhost:5000/logged/stocks').then(response => {
                 setStocks(response.data);
                 console.log(response.data);
             }).catch(err => {
                 console.log(err);
             })
         }, clock);
-        return () =>  clearInterval(id);
-    },[stocks]);
+        return () => clearInterval(id);
+    }, [stocks]);
 
 
-    function erasedata(){
-        axios.delete('http://localhost:5000/erase/stocks').then(response =>{
+    function erasedata() {
+        axios.delete('http://localhost:5000/erase/stocks').then(response => {
             alert('The stocks data has been erased');
         })
 
     }
-
-
     // Insert new data (stocks) into database
 
     const [stocksAdd, setStocksAdd] = useState({
-        txtAtivo : '',
-        nmbQuantity : 0,
-        nmbPriceBuy : 0,
-        nmbPriceSell : 0,
-        nmbQuantitySell : 0,
+        txtStock: '',
+        nmbQuantity: 0,
+        nmbPriceBuy: 0,
+        nmbPriceSell: 0,
+        nmbQuantitySell: 0,
     })
-    function handleInputChange(event){
+    function handleInputChange(event) {
         stocksAdd[event.target.name] = event.target.value;
         setStocksAdd(stocksAdd);
         console.log(stocksAdd);
     }
 
-    function formSubmit(event){
+    function formSubmit(event) {
         event.preventDefault();
-        axios.post('http://localhost:5000/newstock/addstock', stocksAdd).then(response =>{
+        axios.post('http://localhost:5000/newstock/addstock', stocksAdd).then(response => {
+            alert('Success!');
             
         })
     }
 
     return (
+        <Fragment>
+            <Menu></Menu>
             <div>
                 <div className="table">
-                <table>
-                   <th>Ativo{stocks.map(stock =><tr>{stock.Ativo}</tr>)}</th>
-                   <p></p>
-                    <th>Quantity{stocks.map(stock =><tr>{stock.Quantity}</tr>)}</th>
-                    <p></p>
-                    <th>PriceBuy{stocks.map(stock =><tr>{stock.PriceBuy}</tr>)}</th>
-                    <p></p>
-                    <th>PriceSell{stocks.map(stock =><tr>{stock.PriceSell}</tr>)}</th>
-                    <p></p>
-                    <th>QuantitySell{stocks.map(stock =><tr>{stock.QuantitySell}</tr>)}</th>
-                    <p></p>
-                    <th>ProfitNeat{stocks.map(stock =><tr>{stock.ProfitNeat}</tr>)}</th>
-                    <p></p>
-                    <th>ProfitPercentage{stocks.map(stock =><tr>{stock.ProfitPercentage}</tr>)}</th>
-                </table>
-            </div>
-            <form onSubmit={formSubmit}>
-                <input type="text" name="txtStock" placeholder="Stock Name" autoComplete="off" required onChange={handleInputChange}></input>
-                <input type="number" step="0.01" name="nmbQuantity" placeholder="Quantity Bought" autoComplete="off" required onChange={handleInputChange}></input>
-                <input type="number" step="0.01" name="nmbPriceBuy" placeholder="Price Bought" autoComplete="off"  required onChange={handleInputChange}></input>
-                <input type="number" step="0.01" name="nmbPriceSell" placeholder="Price Sold" autoComplete="off" required onChange={handleInputChange}></input>
-                <input type="number" step="0.01" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" required onChange={handleInputChange}></input>
+                    <table className="stocks">
+                        <th>StockName{stocks.map(stock => <tr><td>{stock.Ativo}</td></tr>)}</th>
+                        <p></p>
+                        <th>QuantityBought{stocks.map(stock => <tr><td>{stock.Quantity}</td></tr>)}</th>
+                        <p></p>
+                        <th>PriceBought{stocks.map(stock => <tr><td>{stock.PriceBuy}</td></tr>)}</th>
+                        <p></p>
+                        <th>PriceSold{stocks.map(stock => <tr><td>{stock.PriceSell}</td></tr>)}</th>
+                        <p></p>
+                        <th>QuantitySold{stocks.map(stock => <tr><td>{stock.QuantitySell}</td></tr>)}</th>
+                        <p></p>
+                        <th>Profit($){stocks.map(stock => <tr><td>{stock.ProfitNeat}</td></tr>)}</th>
+                        <p></p>
+                        <th>Profit(%){stocks.map(stock => <tr><td>{stock.ProfitPercentage}</td></tr>)}</th>
+                    </table>
+                </div>
+                <div className="inputs">
+                    <h3 className="stocktext">Inser below your new stock to your list </h3>
+                    <form onSubmit={formSubmit}>
+                        <input type="text" name="txtStock" onSubmit={clear} className="newstock" placeholder="Stock Name" autoComplete="off" required onChange={handleInputChange}></input>
+                        <p></p>
+                        <input type="number" step="0.01" className="newstock" name="nmbQuantity" placeholder="Quantity Bought" autoComplete="off" required onChange={handleInputChange}></input>
+                        <p></p>
+                        <input type="number" step="0.01" className="newstock" name="nmbPriceBuy" placeholder="Price Bought" autoComplete="off" required onChange={handleInputChange}></input>
+                        <p></p>
+                        <input type="number" step="0.01" className="newstock" name="nmbPriceSell" placeholder="Price Sold" autoComplete="off" required onChange={handleInputChange}></input>
+                        <p></p>
+                        <input type="number" step="0.01" className="newstock" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" required onChange={handleInputChange}></input>
+                        <p></p>
+                        <SubmitButton></SubmitButton>
+                    </form>
+                </div>
                 <p></p>
-                <SubmitButton></SubmitButton>
-            </form>
-                <p></p>
-                <button onClick={erasedata}>Erase all data</button>
+                <button className="erase" onClick={erasedata}>Erase all data</button>
                 <p></p>
                 <Link to="/"><button onClick={clear}>Loggout</button></Link>
             </div>
+        </Fragment>
     )
 }
 

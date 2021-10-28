@@ -1,5 +1,4 @@
 button{
-    margin-top: 30%;
     height: 45px;
     width: 200px;
     border-color: red;
@@ -33,4 +32,21 @@ input.submit{
 
 input.submit:hover{
   border-color: white;
+}
+
+button.erase{
+    height: 45px;
+    width: 200px;
+    border-color: red;
+    border-width: 0.5px;
+    color: rgb(255, 255, 255);
+    background-color: black;
+}
+
+.erase:hover{
+  border-color: white;
+}
+
+input.newstock{
+  width: 300px;
 }

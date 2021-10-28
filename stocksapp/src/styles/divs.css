@@ -31,7 +31,7 @@
 
 .table{
     width: 100%;
-    background-color: aquamarine;
+
 }
 
 table{
@@ -54,4 +54,8 @@ body{
     margin-top: -10px;
     margin-left: -10px;
     float: left;
+}
+
+.inputs{
+    margin-top: 50px;
 }
