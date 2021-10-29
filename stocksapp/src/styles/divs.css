@@ -20,7 +20,6 @@
 
 .main{
     margin-top: -15px;
-    
     width: 30%;
     text-align: center;
     height: 100%;
@@ -30,8 +29,11 @@
 }
 
 .table{
-    width: 100%;
-
+    
+    float: right;
+    margin-right:200px;
+    
+    width: 1100px;
 }
 
 table{
@@ -47,15 +49,22 @@ body{
 .menu{
     height: 100vh;
     width: 20%;
-    background-color: black;
-    padding-top: 10%;
+    background-color: rgb(0, 0, 0);
     align-items: center;
     align-content: center;
-    margin-top: -10px;
     margin-left: -10px;
     float: left;
 }
 
 .inputs{
-    margin-top: 50px;
+    
+}
+
+.logo{
+    background-color: black;
+    width: 20%;
+    height: 100px;
+    margin-top: -20px;
+    margin-left: -10px;
+    padding-top: 50px;
 }

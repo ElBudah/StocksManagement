@@ -51,7 +51,7 @@ exports.get = (req, res, next) => {
     sql.connect(config, (err) => {
         if(err)console.log(err);
         let sqlRequest = new sql.Request();
-        let sqlQuery = 'Select * from Stocks';
+        let sqlQuery = 'Select * from Stocks2';
         sqlRequest.query(sqlQuery, (err,data)=>{
 
             console.log(data);

@@ -8,6 +8,7 @@ import { Fragment } from "react/cjs/react.production.min";
 import Menu from "../Components/Menu";
 import '../styles/table.css';
 import '../styles/texts.css';
+import Logo from "../Components/Logo";
 
 
 function LoggedArea() {
@@ -17,7 +18,7 @@ function LoggedArea() {
         window.localStorage.clear();
     }
 
-    const clock = 2000;
+    const clock = 1000;
     useEffect(() => {
         const id = setInterval(() => {
             axios.get('http://localhost:5000/logged/stocks').then(response => {
@@ -56,31 +57,34 @@ function LoggedArea() {
         event.preventDefault();
         axios.post('http://localhost:5000/newstock/addstock', stocksAdd).then(response => {
             alert('Success!');
-            
+
         })
     }
 
     return (
         <Fragment>
-            <Menu></Menu>
-            <div>
-                <div className="table">
-                    <table className="stocks">
-                        <th>StockName{stocks.map(stock => <tr><td>{stock.Ativo}</td></tr>)}</th>
-                        <p></p>
-                        <th>QuantityBought{stocks.map(stock => <tr><td>{stock.Quantity}</td></tr>)}</th>
-                        <p></p>
-                        <th>PriceBought{stocks.map(stock => <tr><td>{stock.PriceBuy}</td></tr>)}</th>
-                        <p></p>
-                        <th>PriceSold{stocks.map(stock => <tr><td>{stock.PriceSell}</td></tr>)}</th>
-                        <p></p>
-                        <th>QuantitySold{stocks.map(stock => <tr><td>{stock.QuantitySell}</td></tr>)}</th>
-                        <p></p>
-                        <th>Profit($){stocks.map(stock => <tr><td>{stock.ProfitNeat}</td></tr>)}</th>
-                        <p></p>
-                        <th>Profit(%){stocks.map(stock => <tr><td>{stock.ProfitPercentage}</td></tr>)}</th>
-                    </table>
-                </div>
+            <Logo></Logo>
+
+            <div className="table">
+                <table className="stocks">
+                    <th>ID{stocks.map(stock => <tr><td>{stock.ID}</td></tr>)}</th>
+                    <p></p>
+                    <th>StockName{stocks.map(stock => <tr><td>{stock.Ativo}</td></tr>)}</th>
+                    <p></p>
+                    <th>QuantityBought{stocks.map(stock => <tr><td>{stock.Quantity}</td></tr>)}</th>
+                    <p></p>
+                    <th>PriceBought{stocks.map(stock => <tr><td>{stock.PriceBought}</td></tr>)}</th>
+                    <p></p>
+                    <th>PriceSold{stocks.map(stock => <tr><td>{stock.PriceSold}</td></tr>)}</th>
+                    <p></p>
+                    <th>QuantitySold{stocks.map(stock => <tr><td>{stock.QuantitySold}</td></tr>)}</th>
+                    <p></p>
+                    <th>Profit($){stocks.map(stock => <tr><td>{stock.ProfitNeat}</td></tr>)}</th>
+                    <p></p>
+                    <th>Profit(%){stocks.map(stock => <tr><td>{stock.ProfitPerc}</td></tr>)}</th>
+                </table>
+            </div>
+            <div className="menu">
                 <div className="inputs">
                     <h3 className="stocktext">Inser below your new stock to your list </h3>
                     <form onSubmit={formSubmit}>
@@ -90,13 +94,15 @@ function LoggedArea() {
                         <p></p>
                         <input type="number" step="0.01" className="newstock" name="nmbPriceBuy" placeholder="Price Bought" autoComplete="off" required onChange={handleInputChange}></input>
                         <p></p>
-                        <input type="number" step="0.01" className="newstock" name="nmbPriceSell" placeholder="Price Sold" autoComplete="off" required onChange={handleInputChange}></input>
+                        <input type="number" step="0.01" className="newstock" name="nmbPriceSell" placeholder="Price Sold" autoComplete="off" onChange={handleInputChange}></input>
                         <p></p>
-                        <input type="number" step="0.01" className="newstock" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" required onChange={handleInputChange}></input>
+                        <input type="number" step="0.01" className="newstock" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" onChange={handleInputChange}></input>
                         <p></p>
                         <SubmitButton></SubmitButton>
                     </form>
                 </div>
+                <p></p>
+                <Link to="/soldstock"><button>Sell Stock</button></Link>
                 <p></p>
                 <button className="erase" onClick={erasedata}>Erase all data</button>
                 <p></p>

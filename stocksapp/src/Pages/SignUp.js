@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
+import Logo from "../Components/Logo";
 import SubmitButton from "../Components/SubmitButton";
 
 function SignUp() {
@@ -29,31 +31,35 @@ function SignUp() {
 
 
     return (
-        <div className="menu">
-            <h3>To create your account fill the blanks below:</h3>
-            <div className="login">
+        <Fragment>
+            <Logo></Logo>
+            <div className="menu">
+                <h3>To create your account fill the blanks below:</h3>
+                <div className="login">
 
 
-                <form onSubmit={formSubmit}>
+                    <form onSubmit={formSubmit}>
 
-                    <h3>Name:
-                        <input type="text" id="txtName" name="txtName" className="input" required autoComplete="off" onChange={inputChange}></input>
-                    </h3>
+                        <h3>Name:
+                            <input type="text" id="txtName" name="txtName" className="input" required autoComplete="off" onChange={inputChange}></input>
+                        </h3>
 
-                    <h3>Email:
-                        <input type="email" id="txtEmail" name="txtEmail" className="input" required autoComplete="off" onChange={inputChange}></input>
-                    </h3>
+                        <h3>Email:
+                            <input type="email" id="txtEmail" name="txtEmail" className="input" required autoComplete="off" onChange={inputChange}></input>
+                        </h3>
 
-                    <h3>Password:
-                        <input type="password" id="txtPass" name="txtPass" className="input" required autoComplete="off" onChange={inputChange}></input>
-                    </h3>
+                        <h3>Password:
+                            <input type="password" id="txtPass" name="txtPass" className="input" required autoComplete="off" onChange={inputChange}></input>
+                        </h3>
 
-                    <input type="submit" className="submit" value="Submit"></input>
-                </form>
-                <Link to="/"><button className="signin">Return</button></Link>
+                        <input type="submit" className="submit" value="Submit"></input>
+                    </form>
+                    <p></p>
+                    <Link to="/"><button className="signin">Return</button></Link>
+                </div>
+
             </div>
-
-        </div>
+        </Fragment>
     )
 }
 

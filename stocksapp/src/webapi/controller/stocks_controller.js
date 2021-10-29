@@ -25,7 +25,7 @@ exports.post = (req, res) => {
         console.log(PriceBuy);
 
         let sqlRequest = new sql.Request();
-        let sqlQuery = "Insert into Stocks values ('" + NewStock + "','" + Quantity + "','" + PriceBuy + "','" + PriceSell + "','" + QuantitySell + "',0,0)";
+        let sqlQuery = "Insert into Stocks2 values ('" + NewStock + "','" + Quantity + "','" + PriceBuy + "','" + PriceSell + "','" + QuantitySell + "',0,0)";
         sqlRequest.query(sqlQuery, (err, data) => {
 
             console.log("Inseriou");
