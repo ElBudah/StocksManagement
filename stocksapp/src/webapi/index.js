@@ -17,7 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/logged', routes);
 app.use('/signup', routes);
 app.use('/erase', routes);
+
 app.use('/newstock', stockroutes);
+app.use('/sell', stockroutes);
 
 app.use('/signin', loginRoutes);
 

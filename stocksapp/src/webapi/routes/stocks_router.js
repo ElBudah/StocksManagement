@@ -9,4 +9,6 @@ app.use(express.json());
 
 stockroutes.post('/addstock', stocks_controller.post);
 
+stockroutes.post('/sellstocks', stocks_controller.sellStocks);
+
 module.exports = stockroutes;

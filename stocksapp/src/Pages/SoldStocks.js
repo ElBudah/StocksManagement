@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Fragment } from "react/cjs/react.production.min";
@@ -24,7 +24,11 @@ function SoldStock() {
         }, clock);
         return () => clearInterval(id);
     }, [stocks]);
+
+    // Logic to sell stocks ########### //
+
     const [soldstock, Setsoldstock] = useState({
+        idselected : 0,
         nmbPriceSell: 0,
         nmbQuantitySell: 0,
     })
@@ -32,7 +36,16 @@ function SoldStock() {
     function handleInputChange(event) {
         soldstock[event.target.name] = event.target.value;
         Setsoldstock(soldstock);
+        console.log(soldstock);
     }
+
+    function sellSubmit(event){
+        event.preventDefault();
+        axios.post('http://localhost:5000/sell/sellstocks', soldstock).then( response => {
+
+        })
+    }
+
     return (
         <Fragment>
             <Logo></Logo>
@@ -55,23 +68,25 @@ function SoldStock() {
                 </table>
             </div>
             <div className="menu">
-                <h3>Select the ID of the stock you want to sell and fill the blanks below </h3>
-                <select className="newstock">
-                    <option value="0">IDs available</option>
-                    {stocks.map(stock => <option key={stock.ID}>{stock.ID}</option>)}
-                </select>
-                <p></p>
-                <input type="number" step="0.01" className="newstock" name="nmbPriceSell" placeholder="Price Sold" autoComplete="off" onChange={handleInputChange}></input>
-                <p></p>
-                <input type="number" step="0.01" className="newstock" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" onChange={handleInputChange}></input>
-                <p></p>
-                <SubmitButton></SubmitButton>
-                <p></p>
-                <Link to='/AddStock'><button>Return</button></Link>
-                <p></p>
-                <Link to="/"><button>Logout</button></Link>
+                <form onSubmit={sellSubmit}>
+                    <h3>Select the ID of the stock you want to sell and fill the blanks below </h3>
+                    <select className="newstock" name="idselected" onChange={handleInputChange}>
+                        <option value="0" >IDs available</option>
+                        {stocks.map(stock => <option key={stock.ID}>{stock.ID}</option>)}
+                    </select>
+                    <p></p>
+                    <input type="number" step="0.01" className="newstock" name="nmbPriceSell" placeholder="Price Sold" autoComplete="off" onChange={handleInputChange}></input>
+                    <p></p>
+                    <input type="number" step="0.01" className="newstock" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" onChange={handleInputChange}></input>
+                    <p></p>
+                    <SubmitButton></SubmitButton>
+                    <p></p>
+                    <Link to='/AddStock'><button>Return</button></Link>
+                    <p></p>
+                    <Link to="/"><button>Logout</button></Link>
+                </form>
             </div>
-            
+
         </Fragment>
     )
 }

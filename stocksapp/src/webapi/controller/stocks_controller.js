@@ -22,8 +22,8 @@ exports.post = (req, res) => {
         const QuantitySell = parseFloat(req.body.nmbQuantitySell);
         const ProfitNeat = null;
         const ProfitPercentage = null;
-        console.log(PriceBuy);
-
+        console.log('Estou aqui');
+        
         let sqlRequest = new sql.Request();
         let sqlQuery = "Insert into Stocks2 values ('" + NewStock + "','" + Quantity + "','" + PriceBuy + "','" + PriceSell + "','" + QuantitySell + "',0,0)";
         sqlRequest.query(sqlQuery, (err, data) => {
@@ -32,6 +32,24 @@ exports.post = (req, res) => {
 
         })
 
+    })
+
+}
+
+exports.sellStocks =  (req,res) =>{
+
+    const IDselected = req.body.idselected;
+    const nmbPriceSell = req.body.nmbPriceSell;
+    const nmbQuantitySell = req.body.nmbQuantitySell;
+
+    console.log(nmbPriceSell);
+    console.log(nmbQuantitySell);
+
+    let sqlRequest = new sql.Request();
+    let sqlQuery = "Update Stocks2 Set PriceSold = '"+nmbPriceSell+"', QuantitySold = '"+nmbQuantitySell+"' where ID = '"+IDselected+"';";
+    
+    sqlRequest.query(sqlQuery, (err,data)=>{
+        console.log(data);
     })
 
 }

@@ -59,6 +59,7 @@ function LoggedArea() {
             alert('Success!');
 
         })
+
     }
 
     return (
@@ -88,7 +89,7 @@ function LoggedArea() {
                 <div className="inputs">
                     <h3 className="stocktext">Inser below your new stock to your list </h3>
                     <form onSubmit={formSubmit}>
-                        <input type="text" name="txtStock" onSubmit={clear} className="newstock" placeholder="Stock Name" autoComplete="off" required onChange={handleInputChange}></input>
+                        <input type="text" name="txtStock" className="newstock" placeholder="Stock Name" autoComplete="off" required onChange={handleInputChange}></input>
                         <p></p>
                         <input type="number" step="0.01" className="newstock" name="nmbQuantity" placeholder="Quantity Bought" autoComplete="off" required onChange={handleInputChange}></input>
                         <p></p>
