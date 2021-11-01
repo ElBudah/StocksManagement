@@ -65,7 +65,6 @@ function LoggedArea() {
     return (
         <Fragment>
             <Logo></Logo>
-
             <div className="table">
                 <table className="stocks">
                     <th>ID{stocks.map(stock => <tr><td>{stock.ID}</td></tr>)}</th>
@@ -104,6 +103,8 @@ function LoggedArea() {
                 </div>
                 <p></p>
                 <Link to="/soldstock"><button>Sell Stock</button></Link>
+                <p></p>
+                <Link to="/calculate"><button>Calculate Profits</button></Link>
                 <p></p>
                 <button className="erase" onClick={erasedata}>Erase all data</button>
                 <p></p>

@@ -6,6 +6,7 @@ import AddStock from "./Pages/AddStock";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import SoldStock from "./Pages/SoldStocks";
+import Calculate from "./Pages/Calculate";
 
 function Routes(){
     return (
@@ -15,6 +16,7 @@ function Routes(){
             <Route component={SignIn} path="/signin" />
             <PrivateRoute component={AddStock} path="/addstock" />
             <PrivateRoute component={SoldStock} path="/soldstock" />
+            <PrivateRoute component={Calculate} path="/calculate" />
         </BrowserRouter>
     )
 }

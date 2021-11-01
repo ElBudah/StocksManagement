@@ -17,3 +17,6 @@ th{
     width: 20px;
 }
 
+tr:hover{
+    background-color: darkcyan;
+}

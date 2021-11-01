@@ -53,8 +53,7 @@ exports.get = (req, res, next) => {
         let sqlRequest = new sql.Request();
         let sqlQuery = 'Select * from Stocks2';
         sqlRequest.query(sqlQuery, (err,data)=>{
-
-            console.log(data);
+            
             res.send(data);
         })
 
@@ -65,7 +64,7 @@ exports.delete = (req,res,next)=>{
     sql.connect(config, (err)=>{
         if(err)console.log(err);
         let sqlRequest = new sql.Request();
-        let sqlQuery = 'Delete from Stocks';
+        let sqlQuery = 'Delete from Stocks2';
         sqlRequest.query(sqlQuery, (err,data)=>{
             console.log(data);
             res.send(data);

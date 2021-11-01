@@ -51,7 +51,7 @@ function SoldStock() {
             <Logo></Logo>
             <div className="table">
                 <table className="stocks">
-                    <th>ID{stocks.map(stock => <tr><td>{stock.ID}</td></tr>)}</th>
+                   {/*  <th>ID{stocks.map(stock => <tr><td>{stock.ID}</td></tr>)}</th>
                     <th>StockName{stocks.map(stock => <tr><td>{stock.Ativo}</td></tr>)}</th>
                     <p></p>
                     <th>QuantityBought{stocks.map(stock => <tr><td>{stock.Quantity}</td></tr>)}</th>
@@ -64,7 +64,26 @@ function SoldStock() {
                     <p></p>
                     <th>Profit($){stocks.map(stock => <tr><td>{stock.ProfitNeat}</td></tr>)}</th>
                     <p></p>
-                    <th>Profit(%){stocks.map(stock => <tr><td>{stock.ProfitPerc}</td></tr>)}</th>
+                    <th>Profit(%){stocks.map(stock => <tr><td>{stock.ProfitPerc}</td></tr>)}</th> */}
+                    <tr>
+                        <th>ID</th>
+                        <th>StockName</th>
+                        <th>QuantityBought</th>
+                        <th>PriceBought</th>
+                        <th>PriceSold</th>
+                        <th>QuantitySold</th>
+                        <th>Profit($)</th>
+                        <th>Profit(%)</th>
+                    </tr>
+                        <td>{stocks.map( stock => <tr>{stock.ID}</tr>)}</td>
+                        <td>{stocks.map( stock => <tr>{stock.Ativo}</tr>)}</td>
+                        <td>{stocks.map( stock => <tr>{stock.Quantity}</tr>)}</td>
+                        <td>{stocks.map( stock => <tr>{stock.PriceBought}</tr>)}</td>
+                        <td>{stocks.map( stock => <tr>{stock.PriceSold}</tr>)}</td>
+                        <td>{stocks.map( stock => <tr>{stock.QuantitySold}</tr>)}</td>
+                        <td>{stocks.map( stock => <tr>{stock.ProfitNeat}</tr>)}</td>
+                        <td>{stocks.map( stock => <tr>{stock.ProfitPerc}</tr>)}</td>
+                    
                 </table>
             </div>
             <div className="menu">
@@ -80,6 +99,8 @@ function SoldStock() {
                     <input type="number" step="0.01" className="newstock" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" onChange={handleInputChange}></input>
                     <p></p>
                     <SubmitButton></SubmitButton>
+                    <p></p>
+                    <Link to="/calculate"><button>Calculate Profits</button></Link>
                     <p></p>
                     <Link to='/AddStock'><button>Return</button></Link>
                     <p></p>

@@ -20,6 +20,7 @@ app.use('/erase', routes);
 
 app.use('/newstock', stockroutes);
 app.use('/sell', stockroutes);
+app.use('/calculate', stockroutes );
 
 app.use('/signin', loginRoutes);
 

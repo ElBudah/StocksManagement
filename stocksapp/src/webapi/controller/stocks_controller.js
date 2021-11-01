@@ -53,3 +53,11 @@ exports.sellStocks =  (req,res) =>{
     })
 
 }
+
+exports.profits = (req,res) =>{
+
+    const id = parseInt(req.body.idselected);
+    console.log("Id selecionado " + id);
+
+
+}
