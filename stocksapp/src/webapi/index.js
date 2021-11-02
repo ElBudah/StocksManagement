@@ -18,9 +18,11 @@ app.use('/logged', routes);
 app.use('/signup', routes);
 app.use('/erase', routes);
 
+//Routes for the Stocks
 app.use('/newstock', stockroutes);
 app.use('/sell', stockroutes);
 app.use('/calculate', stockroutes );
+app.use('/updating', stockroutes);
 
 app.use('/signin', loginRoutes);
 

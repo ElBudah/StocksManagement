@@ -53,7 +53,6 @@ exports.get = (req, res, next) => {
         let sqlRequest = new sql.Request();
         let sqlQuery = 'Select * from Stocks2';
         sqlRequest.query(sqlQuery, (err,data)=>{
-            
             res.send(data);
         })
 

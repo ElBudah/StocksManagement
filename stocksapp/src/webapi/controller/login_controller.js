@@ -39,7 +39,7 @@ exports.post = (req, res, next) => {
                 let sqlRequest = new sql.Request();
                 let sqlQuery = "Select * from Users";
                 sqlRequest.query(sqlQuery, function (err, data) {
-
+                    
                     var Nomes = data.map((item) => {
                         return item.Nome
                     });

@@ -47,6 +47,7 @@ function LoggedArea() {
         nmbPriceSell: 0,
         nmbQuantitySell: 0,
     })
+
     function handleInputChange(event) {
         stocksAdd[event.target.name] = event.target.value;
         setStocksAdd(stocksAdd);

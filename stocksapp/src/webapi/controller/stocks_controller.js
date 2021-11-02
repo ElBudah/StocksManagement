@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const sql = require('mssql');
+const cors = require('cors');
 
 app.use(express.json());
+app.use(cors());
+
 
 const config = {
     user: 'sa',
@@ -23,7 +26,7 @@ exports.post = (req, res) => {
         const ProfitNeat = null;
         const ProfitPercentage = null;
         console.log('Estou aqui');
-        
+
         let sqlRequest = new sql.Request();
         let sqlQuery = "Insert into Stocks2 values ('" + NewStock + "','" + Quantity + "','" + PriceBuy + "','" + PriceSell + "','" + QuantitySell + "',0,0)";
         sqlRequest.query(sqlQuery, (err, data) => {
@@ -31,12 +34,10 @@ exports.post = (req, res) => {
             console.log("Inseriou");
 
         })
-
     })
-
 }
 
-exports.sellStocks =  (req,res) =>{
+exports.sellStocks = (req, res) => {
 
     const IDselected = req.body.idselected;
     const nmbPriceSell = req.body.nmbPriceSell;
@@ -46,18 +47,58 @@ exports.sellStocks =  (req,res) =>{
     console.log(nmbQuantitySell);
 
     let sqlRequest = new sql.Request();
-    let sqlQuery = "Update Stocks2 Set PriceSold = '"+nmbPriceSell+"', QuantitySold = '"+nmbQuantitySell+"' where ID = '"+IDselected+"';";
-    
-    sqlRequest.query(sqlQuery, (err,data)=>{
+    let sqlQuery = "Update Stocks2 Set PriceSold = '" + nmbPriceSell + "', QuantitySold = '" + nmbQuantitySell + "' where ID = '" + IDselected + "';";
+
+    sqlRequest.query(sqlQuery, (err, data) => {
         console.log(data);
+    })
+}
+
+exports.profits = (req, res) => {
+    let id = req.body.idselected;
+    console.log(id);
+    let sqlRequest = new sql.Request();
+    let sqlQuery = 'Select * from Stocks2 where ID = ' + id + '';
+
+    sqlRequest.query(sqlQuery, (err, data) => {
+        console.log("deu certo");
+        console.log(data);
+
+        let PriceSold = data.map((item) => {
+            return item.PriceSold;
+        })
+        console.log(PriceSold);
+
+        let PriceBought = data.map((item) => {
+            return item.PriceBought;
+        })
+        console.log(PriceBought);
+        let Profit1 = PriceSold - PriceBought;
+
+        console.log(Profit1);
+
+        let QuantitySold = data.map((item) => {
+            return item.QuantitySold;
+        })
+
+        console.log(QuantitySold);
+
+        let ProfitFinal = Profit1*QuantitySold;
+
+        console.log(ProfitFinal);
+
+        return res.json({profitUpdate : ProfitFinal, IDUpdate : id})
     })
 
 }
 
-exports.profits = (req,res) =>{
+exports.profitneat = (req,res) => {
+    let profitneat = req.body.value;
+    let ID = req.body.IDupdate;
+    console.log("O valor puro do lucro: "+ profitneat);
+    console.log('O ID que será atualizado é: '+ ID);
 
-    const id = parseInt(req.body.idselected);
-    console.log("Id selecionado " + id);
-
+    let sqlRequest = new sql.Request();
+    let sqlQuery = "Update Stocks2 set ProfitNeat = '"+profitneat+"' where ID = "+ ID +"";
 
 }

@@ -28,7 +28,7 @@ function SoldStock() {
     // Logic to sell stocks ########### //
 
     const [soldstock, Setsoldstock] = useState({
-        idselected : 0,
+        idselected: 0,
         nmbPriceSell: 0,
         nmbQuantitySell: 0,
     })
@@ -39,9 +39,9 @@ function SoldStock() {
         console.log(soldstock);
     }
 
-    function sellSubmit(event){
+    function sellSubmit(event) {
         event.preventDefault();
-        axios.post('http://localhost:5000/sell/sellstocks', soldstock).then( response => {
+        axios.post('http://localhost:5000/sell/sellstocks', soldstock).then(response => {
 
         })
     }
@@ -51,7 +51,7 @@ function SoldStock() {
             <Logo></Logo>
             <div className="table">
                 <table className="stocks">
-                   {/*  <th>ID{stocks.map(stock => <tr><td>{stock.ID}</td></tr>)}</th>
+                    {/*  <th>ID{stocks.map(stock => <tr><td>{stock.ID}</td></tr>)}</th>
                     <th>StockName{stocks.map(stock => <tr><td>{stock.Ativo}</td></tr>)}</th>
                     <p></p>
                     <th>QuantityBought{stocks.map(stock => <tr><td>{stock.Quantity}</td></tr>)}</th>
@@ -75,15 +75,15 @@ function SoldStock() {
                         <th>Profit($)</th>
                         <th>Profit(%)</th>
                     </tr>
-                        <td>{stocks.map( stock => <tr>{stock.ID}</tr>)}</td>
-                        <td>{stocks.map( stock => <tr>{stock.Ativo}</tr>)}</td>
-                        <td>{stocks.map( stock => <tr>{stock.Quantity}</tr>)}</td>
-                        <td>{stocks.map( stock => <tr>{stock.PriceBought}</tr>)}</td>
-                        <td>{stocks.map( stock => <tr>{stock.PriceSold}</tr>)}</td>
-                        <td>{stocks.map( stock => <tr>{stock.QuantitySold}</tr>)}</td>
-                        <td>{stocks.map( stock => <tr>{stock.ProfitNeat}</tr>)}</td>
-                        <td>{stocks.map( stock => <tr>{stock.ProfitPerc}</tr>)}</td>
-                    
+                    <td>{stocks.map(stock => <tr>{stock.ID}</tr>)}</td>
+                    <td>{stocks.map(stock => <tr>{stock.Ativo}</tr>)}</td>
+                    <td>{stocks.map(stock => <tr>{stock.Quantity}</tr>)}</td>
+                    <td>{stocks.map(stock => <tr>{stock.PriceBought}</tr>)}</td>
+                    <td>{stocks.map(stock => <tr>{stock.PriceSold}</tr>)}</td>
+                    <td>{stocks.map(stock => <tr>{stock.QuantitySold}</tr>)}</td>
+                    <td>{stocks.map(stock => <tr>{stock.ProfitNeat}</tr>)}</td>
+                    <td>{stocks.map(stock => <tr>{stock.ProfitPerc}</tr>)}</td>
+
                 </table>
             </div>
             <div className="menu">
