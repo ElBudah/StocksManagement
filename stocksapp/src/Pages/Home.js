@@ -6,6 +6,9 @@ import '../styles/buttons.css';
 import '../styles/divs.css';
 
 function Home() {
+    
+    window.localStorage.clear();
+
     return (
         <Fragment>
             <Logo></Logo>

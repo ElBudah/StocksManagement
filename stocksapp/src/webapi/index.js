@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-
+//Routes for Users
 app.use('/logged', routes);
 app.use('/signup', routes);
 app.use('/erase', routes);

@@ -5,16 +5,43 @@ table.stocks{
     vertical-align: middle;
     align-content: center;
     border-radius: 0.2cm;
+    border-bottom: 1px solid black;
 }
 
 td{
-    padding-left: 22px;
     text-align: center;
-    margin-left: 10px;
 }
+
+.ids{
+    padding-left: 10px;
+}
+
+.stocks{
+    padding-left: 30px;
+}
+
+.qb{
+    padding-left: 70px;
+}
+.pb{
+    padding-left: 55px;
+}
+.ps{
+    padding-left: 45px;
+}
+.qs{
+    padding-left: 55px;
+}
+.pn{
+    padding-left: 20px;
+}
+.pp{
+    padding-left: 30px;
+}
+
 th{
-    margin-left: 10px;
-    width: 20px;
+    width: 10px;
+
 }
 
 

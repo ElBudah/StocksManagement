@@ -12,7 +12,7 @@ function SoldStock() {
         window.localStorage.clear();
     }
 
-    const clock = 1000;
+    const clock = 300;
     useEffect(() => {
         const id = setInterval(() => {
             axios.get('http://localhost:5000/logged/stocks').then(response => {
@@ -50,21 +50,7 @@ function SoldStock() {
         <Fragment>
             <Logo></Logo>
             <div className="table">
-                <table className="stocks">
-                    {/*  <th>ID{stocks.map(stock => <tr><td>{stock.ID}</td></tr>)}</th>
-                    <th>StockName{stocks.map(stock => <tr><td>{stock.Ativo}</td></tr>)}</th>
-                    <p></p>
-                    <th>QuantityBought{stocks.map(stock => <tr><td>{stock.Quantity}</td></tr>)}</th>
-                    <p></p>
-                    <th>PriceBought{stocks.map(stock => <tr><td>{stock.PriceBought}</td></tr>)}</th>
-                    <p></p>
-                    <th>PriceSold{stocks.map(stock => <tr><td>{stock.PriceSold}</td></tr>)}</th>
-                    <p></p>
-                    <th>QuantitySold{stocks.map(stock => <tr><td>{stock.QuantitySold}</td></tr>)}</th>
-                    <p></p>
-                    <th>Profit($){stocks.map(stock => <tr><td>{stock.ProfitNeat}</td></tr>)}</th>
-                    <p></p>
-                    <th>Profit(%){stocks.map(stock => <tr><td>{stock.ProfitPerc}</td></tr>)}</th> */}
+                <table className="stocks" >
                     <tr>
                         <th>ID</th>
                         <th>StockName</th>
@@ -75,15 +61,14 @@ function SoldStock() {
                         <th>Profit($)</th>
                         <th>Profit(%)</th>
                     </tr>
-                    <td>{stocks.map(stock => <tr>{stock.ID}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.Ativo}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.Quantity}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.PriceBought}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.PriceSold}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.QuantitySold}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.ProfitNeat}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.ProfitPerc}</tr>)}</td>
-
+                    <td className="ids">{stocks.map(stock => <tr>{stock.ID}</tr>)}</td>
+                    <td className="stocks">{stocks.map(stock => <tr>{stock.Ativo}</tr>)}</td>
+                    <td className="qb">{stocks.map(stock => <tr>{stock.Quantity}</tr>)}</td>
+                    <td className="pb">{stocks.map(stock => <tr>{stock.PriceBought}</tr>)}</td>
+                    <td className="ps">{stocks.map(stock => <tr>{stock.PriceSold}</tr>)}</td>
+                    <td className="qs">{stocks.map(stock => <tr>{stock.QuantitySold}</tr>)}</td>
+                    <td className="pn">{stocks.map(stock => <tr>{stock.ProfitNeat}</tr>)}</td>
+                    <td className="pp">{stocks.map(stock => <tr>{stock.ProfitPerc}</tr>)}</td>
                 </table>
             </div>
             <div className="menu">
@@ -102,12 +87,11 @@ function SoldStock() {
                     <p></p>
                     <Link to="/calculate"><button>Calculate Profits</button></Link>
                     <p></p>
-                    <Link to='/AddStock'><button>Return</button></Link>
+                    <Link to='/AddStock'><button>Add Stocks</button></Link>
                     <p></p>
                     <Link to="/"><button>Logout</button></Link>
                 </form>
             </div>
-
         </Fragment>
     )
 }

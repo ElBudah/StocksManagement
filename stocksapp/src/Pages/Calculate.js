@@ -1,21 +1,21 @@
 import React, { Fragment, useEffect, useState } from "react";
-import CalculateCompo from "../Components/CalculateCompo";
 import Logo from "../Components/Logo";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SubmitButton from "../Components/SubmitButton";
+import Logout from "../Components/Logout";
 
 
 function Calculate() {
     const [stocks, setStocks] = useState([]);
 
 
-    const clock = 1000;
+    const clock = 300;
     useEffect(() => {
         const id = setInterval(() => {
             axios.get('http://localhost:5000/logged/stocks').then(res => {
                 setStocks(res.data);
-            }).catch(err =>{
+            }).catch(err => {
                 console.log(err);
             })
         }, clock);
@@ -38,30 +38,35 @@ function Calculate() {
         axios.post('http://localhost:5000/calculate/profits', IDs).then(response => {
             alert(response.data.profitUpdate);
             /* window.localStorage.setItem('ProfitNeat',response.data.message); */
-            let a = response.data.profitUpdate;
-            let id = response.data.IDUpdate; 
-            updatetable(a,id);
+            let profitN = response.data.profitUpdate;
+            let id = response.data.IDUpdate;
+            let profitP = response.data.profitPercUpdate;
+            updatetable(profitN, id, profitP);
         })
     }
 
     //update function for Stocks Table inserting ProfitNeat
-    function updatetable(a,id){
-        console.log(a);
+    function updatetable(profitN, id,profitP) {
+        console.log(profitN);
         console.log(id);
-        const valueobj = ({
-            value : a,
-            IDupdate : id
-        })
-        axios.post('http://localhost:5000/updating/profitneat', valueobj).then(response =>{
+        console.log(profitP);
 
+        const valueobj = ({
+            value: profitN,
+            IDupdate: id,
+            profitPupdate: profitP
+        })
+        axios.post('http://localhost:5000/updating/profitneat', valueobj).then(response => {
+            alert('Done');
         })
 
     }
 
     return (
         <Fragment>
+
             <Logo></Logo>
-            <CalculateCompo></CalculateCompo>
+
             <div className="table">
                 <table className="stocks">
                     {/*  <th>ID{stocks.map(stock => <tr><td>{stock.ID}</td></tr>)}</th>
@@ -109,6 +114,12 @@ function Calculate() {
                     <p></p>
                     <SubmitButton></SubmitButton>
                 </form>
+                <p></p>
+                <Link to="/addstock"><button>Return to Add Stocks</button></Link>
+                <p></p>
+                <Link to="/soldstock"><button>Return to Sold Stocks</button></Link>
+                <p></p>
+                <Logout></Logout>
             </div>
 
         </Fragment>

@@ -87,7 +87,19 @@ exports.profits = (req, res) => {
 
         console.log(ProfitFinal);
 
-        return res.json({profitUpdate : ProfitFinal, IDUpdate : id})
+        let stage1 = (PriceSold/PriceBought);
+
+        console.log(stage1);
+
+        let stage2 = stage1-1;
+
+        console.log(stage2);
+
+        let ProfitPercUpdate = (stage2*100).toFixed(2);
+
+        console.log(ProfitPercUpdate + "%");
+
+        return res.json({profitUpdate : ProfitFinal, IDUpdate : id, profitPercUpdate: ProfitPercUpdate})
     })
 
 }
@@ -95,10 +107,18 @@ exports.profits = (req, res) => {
 exports.profitneat = (req,res) => {
     let profitneat = req.body.value;
     let ID = req.body.IDupdate;
+    let profitPerc = req.body.profitPupdate;
     console.log("O valor puro do lucro: "+ profitneat);
     console.log('O ID que será atualizado é: '+ ID);
+    console.log("A porcentagem ficou em: "+ profitPerc);
 
     let sqlRequest = new sql.Request();
-    let sqlQuery = "Update Stocks2 set ProfitNeat = '"+profitneat+"' where ID = "+ ID +"";
+    let sqlQuery = "Update Stocks2 set ProfitNeat = '"+profitneat+"', ProfitPerc = '"+profitPerc+"' where ID = "+ ID +"";
+    sqlRequest.query(sqlQuery, (err,data)=>{
+        console.log('Done');
+    })
+}
+
+exports.profitperc = (req,res) => {
 
 }
