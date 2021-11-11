@@ -9,6 +9,7 @@ import Menu from "../Components/Menu";
 import '../styles/table.css';
 import '../styles/texts.css';
 import Logo from "../Components/Logo";
+import { useFormik } from "formik";
 
 
 function LoggedArea() {
@@ -62,6 +63,7 @@ function LoggedArea() {
         })
 
     }
+
 
     return (
         <Fragment>

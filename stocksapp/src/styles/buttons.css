@@ -5,16 +5,17 @@ button{
     border-width: 0.5px;
     color: rgb(255, 255, 255);
     background-color: black;
+    border-radius: 0.2cm;
   }
 
 .signin{
-  
   height: 45px;
   width: 200px;
   border-color: red;
   border-width: 0.5px;
   color: rgb(255, 255, 255);
   background-color: black;
+  border-radius: 0.2cm;
 }
 
 button:hover{
@@ -28,7 +29,9 @@ input.submit{
     border-color: red;
     color: rgb(255, 255, 255);
     background-color: black;
+    border-radius: 0.2cm;
 }
+
 
 input.submit:hover{
   border-color: white;
@@ -37,10 +40,11 @@ input.submit:hover{
 button.erase{
     height: 45px;
     width: 200px;
-    border-color: red;
+    border-color: rgb(255, 0, 0);
     border-width: 0.5px;
     color: rgb(255, 255, 255);
     background-color: black;
+    border-radius: 0.2cm;
 }
 
 .erase:hover{
@@ -54,12 +58,15 @@ input.newstock{
 }
 
 input.newstock:-ms-input-placeholder{
-  color: rgb(243, 1, 1);
+  color: rgb(6, 97, 139);
 }
 
 select{
   width: 300px;
   height: 30px;
   border-radius: 0.2cm;
-  
+}
+
+input{
+  border-radius: 0.2cm;
 }

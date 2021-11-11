@@ -4,7 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const sql = require('mssql');
 const yup = require('yup');
-const routes = require('./routes/routes');
+const route = require('./routes/user_routes');
 const loginRoutes = require('./routes/login_routes');
 const stockroutes = require('./routes/stocks_router');
 
@@ -14,9 +14,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 //Routes for Users
-app.use('/logged', routes);
-app.use('/signup', routes);
-app.use('/erase', routes);
+app.use('/logged', route);
+app.use('/signup', route);
+app.use('/erase', route);
 
 //Routes for the Stocks
 app.use('/newstock', stockroutes);

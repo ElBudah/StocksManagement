@@ -9,3 +9,11 @@ h3{
 h3.stocktext{
     color: rgb(255, 255, 255);
 }
+
+.error{
+ color: rgb(255, 0, 0);
+}
+
+.label{
+    color: white;
+}
