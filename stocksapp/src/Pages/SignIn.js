@@ -44,7 +44,8 @@ function Logged() {
         },
         validationSchema: userSchema,
         onSubmit: values => {
-            axios.post('http://localhost:5000/sigin', values).then(response => {
+            console.log(values.txtName);
+            axios.post('http://localhost:5000/signin', values).then(response => {
                 if (response.data !== 'error') {
                     window.localStorage.setItem('token', 1);
                 } else {
@@ -65,18 +66,18 @@ function Logged() {
                 <div className="login">
                     <form onSubmit={formik.handleSubmit}  >
                         <label htmlFor="txtName" className="label">*Name:</label>
-                        <input id="txtName" name="txtName" autoComplete="off" required onBlur={formik.handleBlur} onChange={formik.handleChange} />
+                        <input id="txtName" name="txtName" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange} />
                         {formik.touched.txtName && formik.errors.txtName ? <h4 className="error">{formik.errors.txtName}</h4> : null}
                         <p></p>
-                        <label htmlFor="txtEmail" className="label">Email:</label>
-                        <input id="txtEmail" type="email" name="txtEmail" autoComplete="off" required onBlur={formik.handleBlur} onChange={formik.handleChange} />
+                        <label htmlFor="txtEmail" className="label">*Email:</label>
+                        <input id="txtEmail" type="email" name="txtEmail" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange} />
                         {formik.touched.txtEmail && formik.errors.txtEmail ? <h4 className="error">{formik.errors.txtEmail}</h4> : null}
                         <p></p>
-                        <label htmlFor="txtPass" className="label">Password:</label>
-                        <input id="txtPass" type="password" name="txtPass" autoComplete="off" required onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
+                        <label htmlFor="txtPass" className="label">*Password:</label>
+                        <input id="txtPass" type="password" name="txtPass" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
                         {formik.touched.txtPass && formik.errors.txtPass ? <h4 className="error">{formik.errors.txtPass}</h4> : null}
                         <p></p>
-                        <input type="submit" className="submit" onClick={formik.resetForm} value="Enter" />
+                        <input type="submit" className="submit" value="Enter" />
                     </form>
                     <p></p>
                     <Link to="/"><button className="signin">Return</button></Link>

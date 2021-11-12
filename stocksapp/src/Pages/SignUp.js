@@ -76,7 +76,7 @@ function SignUp() {
                         {formik.touched.txtEmail && formik.errors.txtEmail ? <h4 className="error">{formik.errors.txtEmail}</h4>:null }
                         <p></p>
                         <label htmlFor="txtPass" className="label">*Password: </label>
-                        <input type="password" id="txtPass" name="txtPass" className="input" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
+                        <input type="password" id="txtPass" name="txtPass"  className="input" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
                         {formik.touched.txtPass && formik.errors.txtPass ? <h4 className="error">{formik.errors.txtPass}</h4>:null }
                         <p></p>
                         <SubmitButton></SubmitButton>
