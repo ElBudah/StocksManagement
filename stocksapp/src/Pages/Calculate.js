@@ -36,8 +36,6 @@ function Calculate() {
     function submitForm(event) {
         event.preventDefault();
         axios.post('http://localhost:5000/calculate/profits', IDs).then(response => {
-            alert(response.data.profitUpdate);
-            /* window.localStorage.setItem('ProfitNeat',response.data.message); */
             let profitN = response.data.profitUpdate;
             let id = response.data.IDUpdate;
             let profitP = response.data.profitPercUpdate;
@@ -93,14 +91,14 @@ function Calculate() {
                         <th>Profit($)</th>
                         <th>Profit(%)</th>
                     </tr>
-                    <td>{stocks.map(stock => <tr>{stock.ID}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.Ativo}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.Quantity}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.PriceBought}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.PriceSold}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.QuantitySold}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.ProfitNeat}</tr>)}</td>
-                    <td>{stocks.map(stock => <tr>{stock.ProfitPerc}</tr>)}</td>
+                    <td className="ids">{stocks.map(stock => <tr>{stock.ID}</tr>)}</td>
+                    <td className="stocks">{stocks.map(stock => <tr>{stock.Ativo}</tr>)}</td>
+                    <td className="qb">{stocks.map(stock => <tr>{stock.Quantity}</tr>)}</td>
+                    <td className="pb">{stocks.map(stock => <tr>{stock.PriceBought}</tr>)}</td>
+                    <td className="ps">{stocks.map(stock => <tr>{stock.PriceSold}</tr>)}</td>
+                    <td className="qs">{stocks.map(stock => <tr>{stock.QuantitySold}</tr>)}</td>
+                    <td className="pn">{stocks.map(stock => <tr>{stock.ProfitNeat}</tr>)}</td>
+                    <td className="pp">{stocks.map(stock => <tr>{stock.ProfitPerc}</tr>)}</td>
 
                 </table>
             </div>
@@ -112,7 +110,7 @@ function Calculate() {
                         {stocks.map(stocksIDs => <option key={stocksIDs.ID} value={stocks.ID}>{stocksIDs.ID}</option>)}
                     </select>
                     <p></p>
-                    <SubmitButton></SubmitButton>
+                    <SubmitButton title="Calculate"></SubmitButton>
                 </form>
                 <p></p>
                 <Link to="/addstock"><button>Return to Add Stocks</button></Link>

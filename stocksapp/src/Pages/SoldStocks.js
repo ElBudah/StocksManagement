@@ -73,7 +73,7 @@ function SoldStock() {
             </div>
             <div className="menu">
                 <form onSubmit={sellSubmit}>
-                    <h3>Select the ID of the stock you want to sell and fill the blanks below </h3>
+                    <h3>Select stock's ID you want to sell and fill the blanks below </h3>
                     <select className="newstock" name="idselected" onChange={handleInputChange}>
                         <option value="0" >IDs available</option>
                         {stocks.map(stock => <option key={stock.ID}>{stock.ID}</option>)}
@@ -83,7 +83,7 @@ function SoldStock() {
                     <p></p>
                     <input type="number" step="0.01" className="newstock" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" onChange={handleInputChange}></input>
                     <p></p>
-                    <SubmitButton></SubmitButton>
+                    <SubmitButton title="Submit"></SubmitButton>
                     <p></p>
                     <Link to="/calculate"><button>Calculate Profits</button></Link>
                     <p></p>

@@ -126,7 +126,7 @@ function LoggedArea() {
                         <input type="number" step="0.01" className="newstock" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" onBlur={stocksformik.handleBlur} onChange={stocksformik.handleChange}></input>
                         {stocksformik.touched.nmbQuantitySell && stocksformik.errors.nmbQuantitySell ? <div className="error">{stocksformik.errors.nmbQuantitySell}</div>: null}
                         <p></p>
-                        <SubmitButton></SubmitButton>
+                        <SubmitButton title="Submit"></SubmitButton>
                     </form>
                 </div>
                 <p></p>

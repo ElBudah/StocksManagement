@@ -83,9 +83,9 @@ exports.profits = (req, res) => {
 
         console.log(QuantitySold);
 
-        let ProfitFinal = Profit1*QuantitySold;
+        let ProfitFinal = (Profit1*QuantitySold).toFixed(2);
 
-        console.log(ProfitFinal);
+        console.log(ProfitFinal + "$");
 
         let stage1 = (PriceSold/PriceBought);
 

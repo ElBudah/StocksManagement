@@ -38,7 +38,9 @@ table{
     border: 1px solid black;
 }
 
-
+Link{
+    text-decoration: none;
+}
 
 .menu{
     height: 85.32vh;
@@ -62,6 +64,8 @@ table{
     margin-left: -10px;
     padding-top: 50px;
 }
+
+
 
 body{
     background-image: url('../img/goldenbull.jpg');
