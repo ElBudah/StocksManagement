@@ -7,38 +7,10 @@ import SubmitButton from "../Components/SubmitButton";
 import userSchema from "../Validation/UserValidation";
 import * as yup from 'yup';
 import { Formik, Form, Field, useFormik } from "formik";
+import swal from 'sweetalert';
 
 
 function SignUp() {
-    /* const [user, setUser] = useState({
-        txtName: '',
-        txtEmail: '',
-        txtPass: 0,
-    })
-
-    const formSubmit = async (event) => {
-        event.preventDefault();
-
-        console.log('entrou aqui');
-        const isValid = await userSchema.isValid(user);
-        console.log("Is valid: " + isValid);
-
-        if (isValid) {
-            axios.post('http://localhost:5000/signup', user).then(response => {
-                if (response.data.message == 1) {
-                    alert('Endereço de email já em uso. Tente novamente');
-                } else if (response.data.message == 2) {
-                    alert('Usuário cadastro com sucesso!');
-                }
-            })
-        }
-    }
-
-    function inputChange(event) {
-        user[event.target.name] = event.target.value;
-        setUser(user);
-        console.log(user);
-    } */
 
     const formik = useFormik({
         initialValues: {
@@ -51,9 +23,9 @@ function SignUp() {
             console.log(values.txtName);
             axios.post('http://localhost:5000/signup', values).then(response => {
                 if (response.data.message == 1) {
-                    alert('Endereço de email já em uso. Tente novamente');
+                    swal('Failed',"Email already used! Try a new one","error");
                 } else if (response.data.message == 2) {
-                    alert('Usuário cadastro com sucesso!');
+                    swal('Success','User created with success','success');
                 }
             })
         }
@@ -79,7 +51,7 @@ function SignUp() {
                         <input type="password" id="txtPass" name="txtPass"  className="input" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
                         {formik.touched.txtPass && formik.errors.txtPass ? <h4 className="error">{formik.errors.txtPass}</h4>:null }
                         <p></p>
-                        <SubmitButton></SubmitButton>
+                        <SubmitButton title="Submit"></SubmitButton>
                     </form>
                     <p></p>
                     <Link to="/"><button className="signin">Return</button></Link>

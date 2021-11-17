@@ -8,6 +8,7 @@ import Logo from "../Components/Logo";
 import { Fragment } from "react/cjs/react.production.min";
 import { useFormik } from "formik";
 import userSchema from "../Validation/UserValidation";
+import SubmitButton from "../Components/SubmitButton";
 
 function Logged() {
     /* const [user, Setuser] = useState({
@@ -77,7 +78,7 @@ function Logged() {
                         <input id="txtPass" type="password" name="txtPass" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
                         {formik.touched.txtPass && formik.errors.txtPass ? <h4 className="error">{formik.errors.txtPass}</h4> : null}
                         <p></p>
-                        <input type="submit" className="submit" value="Enter" />
+                        <SubmitButton title="Enter" ></SubmitButton>
                     </form>
                     <p></p>
                     <Link to="/"><button className="signin">Return</button></Link>

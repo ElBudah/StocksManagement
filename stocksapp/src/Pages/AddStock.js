@@ -14,7 +14,7 @@ import stockValidation from "../Validation/StocksValidation";
 
 
 function LoggedArea() {
-    const [stocks, setStocks] = useState([]); 
+    const [stocks, setStocks] = useState([]);
 
     function clear() {
         window.localStorage.clear();
@@ -40,30 +40,7 @@ function LoggedArea() {
         })
 
     }
-    // Insert new data (stocks) into database
 
-    /* const [stocksAdd, setStocksAdd] = useState({
-        txtStock: '',
-        nmbQuantity: 0,
-        nmbPriceBuy: 0,
-        nmbPriceSell: 0,
-        nmbQuantitySell: 0,
-    })
-
-    function handleInputChange(event) {
-        stocksAdd[event.target.name] = event.target.value;
-        setStocksAdd(stocksAdd);
-        console.log(stocksAdd);
-    }
-
-    function formSubmit(event) {
-        event.preventDefault();
-        axios.post('http://localhost:5000/newstock/addstock', stocksAdd).then(response => {
-            alert('Success!');
-
-        })
-
-    } */
     const stocksformik = useFormik({
         initialValues: {
             txtStock: '',
@@ -112,20 +89,20 @@ function LoggedArea() {
                     <h3 className="stocktext">Inser below your new stock to your list </h3>
                     <form onSubmit={stocksformik.handleSubmit}>
                         <input type="text" name="txtStock" className="newstock" placeholder="Stock Name" autoComplete="off" onBlur={stocksformik.handleBlur} onChange={stocksformik.handleChange}></input>
-                        {stocksformik.touched.txtStock && stocksformik.errors.txtStock ? <div className="error">{stocksformik.errors.txtStock}</div>: null}
-                        <p></p>
+
+                        <p>{stocksformik.touched.txtStock && stocksformik.errors.txtStock ? <div className="error">{stocksformik.errors.txtStock}</div> : null}</p>
                         <input type="number" step="0.01" className="newstock" name="nmbQuantity" placeholder="Quantity Bought" autoComplete="off" onBlur={stocksformik.handleBlur} onChange={stocksformik.handleChange}></input>
-                        {stocksformik.touched.nmbQuantity && stocksformik.errors.nmbQuantity ? <div className="error">{stocksformik.errors.nmbQuantity}</div>: null}
-                        <p></p>
+                        
+                        <p>{stocksformik.touched.nmbQuantity && stocksformik.errors.nmbQuantity ? <div className="error">{stocksformik.errors.nmbQuantity}</div> : null}</p>
                         <input type="number" step="0.01" className="newstock" name="nmbPriceBuy" placeholder="Price Bought" autoComplete="off" onBlur={stocksformik.handleBlur} onChange={stocksformik.handleChange}></input>
-                        {stocksformik.touched.nmbPriceBuy && stocksformik.errors.nmbPriceBuy ? <div className="error">{stocksformik.errors.nmbPriceBuy}</div>: null}
-                        <p></p>
+                        
+                        <p>{stocksformik.touched.nmbPriceBuy && stocksformik.errors.nmbPriceBuy ? <div className="error">{stocksformik.errors.nmbPriceBuy}</div> : null}</p>
                         <input type="number" step="0.01" className="newstock" name="nmbPriceSell" placeholder="Price Sold" autoComplete="off" onBlur={stocksformik.handleBlur} onChange={stocksformik.handleChange}></input>
-                        {stocksformik.touched.nmbPriceSell && stocksformik.errors.nmbPriceSell ? <div className="error">{stocksformik.errors.nmbPriceSell}</div>: null}
-                        <p></p>
+                        
+                        <p>{stocksformik.touched.nmbPriceSell && stocksformik.errors.nmbPriceSell ? <div className="error">{stocksformik.errors.nmbPriceSell}</div> : null}</p>
                         <input type="number" step="0.01" className="newstock" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" onBlur={stocksformik.handleBlur} onChange={stocksformik.handleChange}></input>
-                        {stocksformik.touched.nmbQuantitySell && stocksformik.errors.nmbQuantitySell ? <div className="error">{stocksformik.errors.nmbQuantitySell}</div>: null}
-                        <p></p>
+                        
+                        <p>{stocksformik.touched.nmbQuantitySell && stocksformik.errors.nmbQuantitySell ? <div className="error">{stocksformik.errors.nmbQuantitySell}</div> : null}</p>
                         <SubmitButton title="Submit"></SubmitButton>
                     </form>
                 </div>
