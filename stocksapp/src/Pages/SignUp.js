@@ -1,12 +1,12 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
-import Logo from "../Components/Logo";
-import SubmitButton from "../Components/SubmitButton";
-import userSchema from "../Validation/UserValidation";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import Logo from '../Components/Logo';
+import SubmitButton from '../Components/SubmitButton';
+import userSchema from '../Validation/UserValidation';
 import * as yup from 'yup';
-import { Formik, Form, Field, useFormik } from "formik";
+import { Formik, Form, Field, useFormik } from 'formik';
 import swal from 'sweetalert';
 
 
@@ -19,13 +19,21 @@ function SignUp() {
             txtPass: 0,
         },
         validationSchema: userSchema,
-        onSubmit: values => {
-            console.log(values.txtName);
+        onSubmit: (values, extras) => {
+            console.log(values);
             axios.post('http://localhost:5000/signup', values).then(response => {
                 if (response.data.message == 1) {
-                    swal('Failed',"Email already used! Try a new one","error");
+                    alert('Error');
                 } else if (response.data.message == 2) {
-                    swal('Success','User created with success','success');
+                    alert('Success');
+                }
+                window.location.href = '/signup'; 
+            })
+            extras.resetForm({
+                values:{
+                    txtName:'',
+                    txtEmail: '',
+                    txtPass: ''
                 }
             })
         }
@@ -41,15 +49,15 @@ function SignUp() {
                     <form onSubmit={formik.handleSubmit}>
                         <label htmlFor="txtName" className="label">*Name:</label>
                         <input type="text" id="txtName" name="txtName" className="input" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
-                        {formik.touched.txtName && formik.errors.txtName ? <h4 className="error">{formik.errors.txtName}</h4>:null }
+                        {formik.touched.txtName && formik.errors.txtName ? <h4 className="error">{formik.errors.txtName}</h4> : null}
                         <p></p>
                         <label htmlFor="txtEmail" className="label">*Email:</label>
                         <input type="email" id="txtEmail" name="txtEmail" className="input" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
-                        {formik.touched.txtEmail && formik.errors.txtEmail ? <h4 className="error">{formik.errors.txtEmail}</h4>:null }
+                        {formik.touched.txtEmail && formik.errors.txtEmail ? <h4 className="error">{formik.errors.txtEmail}</h4> : null}
                         <p></p>
                         <label htmlFor="txtPass" className="label">*Password: </label>
-                        <input type="password" id="txtPass" name="txtPass"  className="input" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
-                        {formik.touched.txtPass && formik.errors.txtPass ? <h4 className="error">{formik.errors.txtPass}</h4>:null }
+                        <input type="password" id="txtPass" name="txtPass" className="input" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
+                        {formik.touched.txtPass && formik.errors.txtPass ? <h4 className="error">{formik.errors.txtPass}</h4> : null}
                         <p></p>
                         <SubmitButton title="Submit"></SubmitButton>
                     </form>
