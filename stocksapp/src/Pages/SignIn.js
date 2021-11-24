@@ -9,37 +9,18 @@ import { Fragment } from "react/cjs/react.production.min";
 import { useFormik } from "formik";
 import userSchema from "../Validation/UserValidation";
 import SubmitButton from "../Components/SubmitButton";
-import UserForm from "../Components/UserForm";
-import UserFormNew from "../Components/UserFormNew";
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 function Logged() {
-    /* const [user, Setuser] = useState({
-        txtName: '',
-        txtEmail: '',
-        txtPass: 0,
-    })
 
-    function formSubmit(event) {
-        event.preventDefault();
-        axios.post('http://localhost:5000/signin', user).then(response => {
-            if (response.data !== 'error') {
-                window.localStorage.setItem('token', 1);
-            } else {
-                alert('Credenciais inválidas');
-            }
-            window.location = '/addstock';
-        })
-
+    function test(){
+        swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
     }
-
-    function inputChange(event) {
-        user[event.target.name] = event.target.value;
-        Setuser(user);
-        console.log(user);
-    } */
-
-
     const formik = useFormik({
         initialValues: {
             txtName: '',
@@ -47,14 +28,18 @@ function Logged() {
             txtPass: 0,
         },
         validationSchema: userSchema,
-        onSubmit: (values, actions) => {
+        onSubmit: (values, actions) => { 
             console.log(values);
             axios.post('http://localhost:5000/signin', values).then(response => {
                 if (response.data !== 'error') {
                     window.localStorage.setItem('token', 1);
                 } else {
-                    /* swal('Failed', 'Check your credentials', 'error'); */
-                    alert('Wrong');
+                    swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        footer: '<a href="">Why do I have this issue?</a>'
+                      })
                 }
                 window.location = '/addstock';
             })
@@ -65,9 +50,7 @@ function Logged() {
                     txtName: ''
                 }
             })
-
         }
-
     })
     return (
         <Fragment>
@@ -94,6 +77,7 @@ function Logged() {
                     <Link to="/"><button className="signin">Return</button></Link>
                 </div>
 
+                <button onClick={test}></button>
             </div>
         </Fragment>
     )

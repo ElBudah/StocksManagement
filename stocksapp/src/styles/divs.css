@@ -1,6 +1,6 @@
 .homepage{
     margin-top: 25%;
-    width: 20%;
+    width: 380px;
     text-align: center;
     background-color: black;
    
@@ -44,7 +44,7 @@ Link{
 
 .menu{
     height: 85.32vh;
-    width: 20%;
+    width: 380px;
     background-color: black;
     align-items: center;
     align-content: center;
@@ -58,18 +58,16 @@ Link{
 
 .logo{
     background-color: rgb(0, 0, 0);
-    width: 20%;
+    width: 380px;
     height: 100px;
     margin-top: -20px;
     margin-left: -10px;
     padding-top: 50px;
 }
 
-
-
 body{
     background-image: url('../img/goldenbull.jpg');
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
-
+    background-position: center;
 }
