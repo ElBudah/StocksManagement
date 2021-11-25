@@ -7,7 +7,7 @@ import SubmitButton from '../Components/SubmitButton';
 import userSchema from '../Validation/UserValidation';
 import * as yup from 'yup';
 import { Formik, Form, Field, useFormik } from 'formik';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 
 function SignUp() {
@@ -23,11 +23,19 @@ function SignUp() {
             console.log(values);
             axios.post('http://localhost:5000/signup', values).then(response => {
                 if (response.data.message == 1) {
-                    alert('Error');
+                    swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Email already in use',
+                    })
                 } else if (response.data.message == 2) {
-                    alert('Success');
+                    swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'New user cadastrated!',
+                    })
                 }
-                window.location.href = '/signup'; 
+                
             })
             extras.resetForm({
                 values:{

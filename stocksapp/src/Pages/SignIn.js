@@ -33,23 +33,15 @@ function Logged() {
             axios.post('http://localhost:5000/signin', values).then(response => {
                 if (response.data !== 'error') {
                     window.localStorage.setItem('token', 1);
+                    window.location = '/addstock';
                 } else {
                     swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                        footer: '<a href="">Why do I have this issue?</a>'
-                      })
+                        title: 'Error',
+                        text: 'Invalid credentials',
+                    })
                 }
-                window.location = '/addstock';
-            })
-            actions.resetForm({
-                values: {
-                    txtPass: '',
-                    txtEmail: '',
-                    txtName: ''
-                }
-            })
+            })       
         }
     })
     return (
@@ -76,8 +68,6 @@ function Logged() {
                     <p></p>
                     <Link to="/"><button className="signin">Return</button></Link>
                 </div>
-
-                <button onClick={test}></button>
             </div>
         </Fragment>
     )
