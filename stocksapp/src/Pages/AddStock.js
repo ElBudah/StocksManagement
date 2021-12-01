@@ -11,6 +11,7 @@ import '../styles/texts.css';
 import Logo from "../Components/Logo";
 import { Formik, useFormik } from "formik";
 import stockValidation from "../Validation/StocksValidation";
+import swal from "sweetalert2";
 
 
 function LoggedArea() {
@@ -23,7 +24,7 @@ function LoggedArea() {
     const clock = 50;
     useEffect(() => {
         const id = setInterval(() => {
-            axios.get('http://localhost:5000/logged/stocks').then(response => {
+            axios.get('http://localhost:5000/show/stocks').then(response => {
                 setStocks(response.data);
                 console.log(response.data);
             }).catch(err => {
@@ -36,7 +37,11 @@ function LoggedArea() {
 
     function erasedata() {
         axios.delete('http://localhost:5000/erase/stocks').then(response => {
-            alert('The stocks data has been erased');
+            swal.fire({
+                icon: 'info',
+                text: 'All data has been deleted',
+                title: 'Erased'
+            })
         })
 
     }

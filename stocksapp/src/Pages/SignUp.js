@@ -8,11 +8,36 @@ import userSchema from '../Validation/UserValidation';
 import * as yup from 'yup';
 import { Formik, Form, Field, useFormik } from 'formik';
 import swal from 'sweetalert2';
-
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 function SignUp() {
 
-    const formik = useFormik({
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+        resolver: yupResolver(userSchema),
+    });
+
+    const onSubmitHandler = (data) => {
+        console.log(data);
+        axios.post('http://localhost:5000/users/signup', data).then(response => {
+            if (response.data.message == 1) {
+                swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Email already in use',
+                })
+            } else if (response.data.message == 2) {
+                swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'New user cadastrated!',
+                })
+            }
+
+        })
+        reset();
+    };
+    /* const formik = useFormik({
         initialValues: {
             txtName: '',
             txtEmail: '',
@@ -21,7 +46,7 @@ function SignUp() {
         validationSchema: userSchema,
         onSubmit: (values, extras) => {
             console.log(values);
-            axios.post('http://localhost:5000/signup', values).then(response => {
+            axios.post('http://localhost:5000/users/signup', values).then(response => {
                 if (response.data.message == 1) {
                     swal.fire({
                         icon: 'error',
@@ -46,7 +71,7 @@ function SignUp() {
             })
         }
         
-    })
+    }) */
 
     return (
         <Fragment>
@@ -54,20 +79,20 @@ function SignUp() {
             <div className="menu">
                 <h3>To create your account fill the blanks below:</h3>
                 <div className="login">
-                    <form onSubmit={formik.handleSubmit}>
-                        <label htmlFor="txtName" className="label">*Name:</label>
-                        <input type="text" id="txtName" name="txtName" className="input" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
-                        {formik.touched.txtName && formik.errors.txtName ? <h4 className="error">{formik.errors.txtName}</h4> : null}
+                    <form onSubmit={handleSubmit(onSubmitHandler)}>
+                        <input {...register("txtName")} placeholder="Name" type="text" />
+                        <h4 className="error">{errors.txtName?.message}</h4>
                         <p></p>
-                        <label htmlFor="txtEmail" className="label">*Email:</label>
-                        <input type="email" id="txtEmail" name="txtEmail" className="input" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
-                        {formik.touched.txtEmail && formik.errors.txtEmail ? <h4 className="error">{formik.errors.txtEmail}</h4> : null}
+
+                        <input {...register("txtEmail")} placeholder="Email" />
+                        <h4 className="error">{errors.txtEmail?.message}</h4>
                         <p></p>
-                        <label htmlFor="txtPass" className="label">*Password: </label>
-                        <input type="password" id="txtPass" name="txtPass" className="input" autoComplete="off" onBlur={formik.handleBlur} onChange={formik.handleChange}></input>
-                        {formik.touched.txtPass && formik.errors.txtPass ? <h4 className="error">{formik.errors.txtPass}</h4> : null}
+
+                        <input {...register("txtPass")} placeholder="Password" type='password' />
+                        <h4 className="error">{errors.txtPass?.message}</h4>
                         <p></p>
-                        <SubmitButton title="Submit"></SubmitButton>
+
+                        <SubmitButton title="Sign Up"/>
                     </form>
                     <p></p>
                     <Link to="/"><button className="signin">Return</button></Link>
