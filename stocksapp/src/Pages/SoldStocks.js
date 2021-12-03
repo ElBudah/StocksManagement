@@ -15,7 +15,7 @@ function SoldStock() {
     const clock = 300;
     useEffect(() => {
         const id = setInterval(() => {
-            axios.get('http://localhost:5000/logged/stocks').then(response => {
+            axios.get('http://localhost:5000/show/stocks').then(response => {
                 setStocks(response.data);
                 console.log(response.data);
             }).catch(err => {

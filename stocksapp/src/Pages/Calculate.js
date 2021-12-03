@@ -13,7 +13,7 @@ function Calculate() {
     const clock = 300;
     useEffect(() => {
         const id = setInterval(() => {
-            axios.get('http://localhost:5000/logged/stocks').then(res => {
+            axios.get('http://localhost:5000/show/stocks').then(res => {
                 setStocks(res.data);
             }).catch(err => {
                 console.log(err);

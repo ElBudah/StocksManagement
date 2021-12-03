@@ -12,6 +12,9 @@ import Logo from "../Components/Logo";
 import { Formik, useFormik } from "formik";
 import stockValidation from "../Validation/StocksValidation";
 import swal from "sweetalert2";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 
 
 function LoggedArea() {
@@ -46,7 +49,22 @@ function LoggedArea() {
 
     }
 
-    const stocksformik = useFormik({
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+        resolver: yupResolver(stockValidation),
+    })
+
+    const onSubmit = (data) => {
+        console.log(data);
+        axios.post('http://localhost:5000/newstock/addstock', data).then(response => { 
+        })
+        swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'A new stock has been added!'
+        })
+        reset();
+    }
+    /* const stocksformik = useFormik({
         initialValues: {
             txtStock: '',
             nmbQuantity: 0,
@@ -62,7 +80,7 @@ function LoggedArea() {
             })
         },
 
-    })
+    }) */
 
     return (
         <Fragment>
@@ -92,23 +110,23 @@ function LoggedArea() {
             <div className="menu">
                 <div className="inputs">
                     <h3 className="stocktext">Inser below your new stock to your list </h3>
-                    <form onSubmit={stocksformik.handleSubmit}>
-                        <input type="text" name="txtStock" className="newstock" placeholder="Stock Name" autoComplete="off" onBlur={stocksformik.handleBlur} onChange={stocksformik.handleChange}></input>
-
-                        <p>{stocksformik.touched.txtStock && stocksformik.errors.txtStock ? <div className="error">{stocksformik.errors.txtStock}</div> : null}</p>
-                        <input type="number" step="0.01" className="newstock" name="nmbQuantity" placeholder="Quantity Bought" autoComplete="off" onBlur={stocksformik.handleBlur} onChange={stocksformik.handleChange}></input>
-
-                        <p>{stocksformik.touched.nmbQuantity && stocksformik.errors.nmbQuantity ? <div className="error">{stocksformik.errors.nmbQuantity}</div> : null}</p>
-                        <input type="number" step="0.01" className="newstock" name="nmbPriceBuy" placeholder="Price Bought" autoComplete="off" onBlur={stocksformik.handleBlur} onChange={stocksformik.handleChange}></input>
-
-                        <p>{stocksformik.touched.nmbPriceBuy && stocksformik.errors.nmbPriceBuy ? <div className="error">{stocksformik.errors.nmbPriceBuy}</div> : null}</p>
-                        <input type="number" step="0.01" className="newstock" name="nmbPriceSell" placeholder="Price Sold" autoComplete="off" onBlur={stocksformik.handleBlur} onChange={stocksformik.handleChange}></input>
-
-                        <p>{stocksformik.touched.nmbPriceSell && stocksformik.errors.nmbPriceSell ? <div className="error">{stocksformik.errors.nmbPriceSell}</div> : null}</p>
-                        <input type="number" step="0.01" className="newstock" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" onBlur={stocksformik.handleBlur} onChange={stocksformik.handleChange}></input>
-
-                        <p>{stocksformik.touched.nmbQuantitySell && stocksformik.errors.nmbQuantitySell ? <div className="error">{stocksformik.errors.nmbQuantitySell}</div> : null}</p>
-                        <button type="submit">Submit</button>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <input autoComplete="off" placeholder="Stock Name" {...register('txtStock')} />
+                        <h4 className="error">{errors.txtStock?.message}</h4>
+                        <p></p>
+                        <input autoComplete="off" placeholder="Quantity Bought" {...register('nmbQuantity')} />
+                        <h4 className="error">{errors.nmbQuantity?.message}</h4>
+                        <p></p>
+                        <input autoComplete="off" placeholder="Price Bought" {...register('nmbPriceBuy')} />
+                        <h4 className="error">{errors.nmbPriceBuy?.message}</h4>
+                        <p></p>
+                        <input autoComplete="off" placeholder="Price Sold" {...register('nmbPriceSell')} />
+                        <h4 className="error">{errors.nmbPriceSell?.message}</h4>
+                        <p></p>
+                        <input autoComplete="off" placeholder="Quantity Sold" {...register('nmbQuantitySell')} />
+                        <h4 className="error">{errors.nmbQuantitySell?.message}</h4>
+                        <p></p>
+                        <SubmitButton title="Submit " />
                     </form>
                 </div>
                 <p></p>
