@@ -23,17 +23,29 @@ exports.post = (req, res) => {
         const PriceBuy = parseFloat(req.body.nmbPriceBuy);
         const PriceSell = parseFloat(req.body.nmbPriceSell);
         const QuantitySell = parseFloat(req.body.nmbQuantitySell);
+
+        console.log("preco de venda: "+ PriceSell);
+        console.log('Quantidade de venda: ' + QuantitySell);
+        
         const ProfitNeat = null;
         const ProfitPercentage = null;
         console.log('Estou aqui');
 
         let sqlRequest = new sql.Request();
-        let sqlQuery = "Insert into Stocks2 values ('" + NewStock + "','" + Quantity + "','" + PriceBuy + "','" + PriceSell + "','" + QuantitySell + "',0,0)";
-        sqlRequest.query(sqlQuery, (err, data) => {
-
-            console.log("Inseriou");
-
+        if (PriceSell && QuantitySell != null){
+            let sqlQuery = "Insert into Stocks2 values ('" + NewStock + "','" + Quantity + "','" + PriceBuy + "','" + PriceSell + "','" + QuantitySell + "',0,0)";
+            sqlRequest.query(sqlQuery, (err, data) => {
+            console.log("Inseriou sem valores nulos");
         })
+        }
+        if(isNaN(PriceSell && QuantitySell)){
+            let sqlQuery = "Insert into Stocks2 values ('" + NewStock + "','" + Quantity + "','" + PriceBuy + "', 0,0,0,0)";
+            sqlRequest.query(sqlQuery, (err,data) => {
+                console.log('Inseriu com valores nulos');
+            })
+        }
+        
+        
     })
 }
 
