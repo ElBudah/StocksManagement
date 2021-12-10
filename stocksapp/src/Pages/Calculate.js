@@ -62,9 +62,7 @@ function Calculate() {
 
     return (
         <Fragment>
-
             <Logo></Logo>
-
             <div className="table">
                 <table className="stocks">
                     {/*  <th>ID{stocks.map(stock => <tr><td>{stock.ID}</td></tr>)}</th>

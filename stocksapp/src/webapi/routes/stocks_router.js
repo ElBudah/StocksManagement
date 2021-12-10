@@ -10,6 +10,7 @@ app.use(express.json());
 stockroutes.post('/addstock', stocks_controller.post);
 stockroutes.post('/sellstocks', stocks_controller.sellStocks);
 stockroutes.post('/profits', stocks_controller.profits);
+/* stockroutes.get('/profitStocks', stocks_controller.profitStocks); */
 stockroutes.post('/profitneat', stocks_controller.profitneat);
 stockroutes.get('/stocks', stocks_controller.get);
 

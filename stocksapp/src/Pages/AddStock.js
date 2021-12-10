@@ -24,12 +24,12 @@ function LoggedArea() {
         window.localStorage.clear();
     }
 
-    const clock = 50;
+    const clock = 200;
     useEffect(() => {
         const id = setInterval(() => {
             axios.get('http://localhost:5000/show/stocks').then(response => {
                 setStocks(response.data);
-                console.log(response.data);
+            
             }).catch(err => {
                 console.log(err);
             })
@@ -111,13 +111,13 @@ function LoggedArea() {
                 <div className="inputs">
                     <h3 className="stocktext">Inser below your new stock to your list </h3>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <input autoComplete="off" placeholder="Stock Name" {...register('txtStock')} />
+                        <input autoComplete="off" placeholder="Stock Name*" {...register('txtStock')} />
                         <h4 className="error">{errors.txtStock?.message}</h4>
                         <p></p>
-                        <input autoComplete="off" placeholder="Quantity Bought" {...register('nmbQuantity')} />
+                        <input autoComplete="off" placeholder="Quantity Bought*" {...register('nmbQuantity')} />
                         <h4 className="error">{errors.nmbQuantity?.message}</h4>
                         <p></p>
-                        <input autoComplete="off" placeholder="Price Bought" {...register('nmbPriceBuy')} />
+                        <input autoComplete="off" placeholder="Price Bought*" {...register('nmbPriceBuy')} />
                         <h4 className="error">{errors.nmbPriceBuy?.message}</h4>
                         <p></p>
                         <input autoComplete="off" placeholder="Price Sold" {...register('nmbPriceSell')} />

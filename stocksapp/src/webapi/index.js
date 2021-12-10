@@ -25,6 +25,7 @@ app.use('/show', stockroutes);
 app.use('/erase', stockroutes);
 
 
+
 app.listen(5000, () => {
     console.log('The webserver is running');
 })

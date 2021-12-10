@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import { Fragment } from "react/cjs/react.production.min";
 import Logo from "../Components/Logo";
 import SubmitButton from "../Components/SubmitButton";
+import swal from 'sweetalert2';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import '../styles/buttons.css';
+import StocksSellValidation from "../Validation/StocksSellValidation";
 
 function SoldStock() {
     const [stocks, setStocks] = useState([]);
@@ -12,39 +17,48 @@ function SoldStock() {
         window.localStorage.clear();
     }
 
-    const clock = 300;
+    const clock = 200;
     useEffect(() => {
         const id = setInterval(() => {
             axios.get('http://localhost:5000/show/stocks').then(response => {
                 setStocks(response.data);
-                console.log(response.data);
             }).catch(err => {
                 console.log(err);
-            })
+            });
         }, clock);
         return () => clearInterval(id);
     }, [stocks]);
 
     // Logic to sell stocks ########### //
 
-    const [soldstock, Setsoldstock] = useState({
-        idselected: 0,
-        nmbPriceSell: 0,
-        nmbQuantitySell: 0,
-    })
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+        resolver: yupResolver(StocksSellValidation)
+    });
 
-    function handleInputChange(event) {
-        soldstock[event.target.name] = event.target.value;
-        Setsoldstock(soldstock);
-        console.log(soldstock);
-    }
-
-    function sellSubmit(event) {
-        event.preventDefault();
-        axios.post('http://localhost:5000/sell/sellstocks', soldstock).then(response => {
-
+    const onSubmitHandler = (sell) => {
+        axios.post('http://localhost:5000/sell/sellstocks', sell).then(response => {
         })
-    }
+        swal.fire({
+            icon: 'sucess',
+            title: 'Success',
+            text: 'Your sell information has been added'
+        });
+        reset();
+    };
+
+
+    // Logic to automatically calculte de profits
+
+    /* const clockProfit = 1000;
+     useEffect(() => {
+        const idprofit = setInterval(() => {
+            axios.get('http://localhost:5000/auto/profitStocks').then(res => {
+            }).catch(err => {
+                console.log(err);
+            })
+        }, clockProfit);
+        return () => clearInterval(idprofit);
+    }, [stocks]);  */ 
 
     return (
         <Fragment>
@@ -72,25 +86,27 @@ function SoldStock() {
                 </table>
             </div>
             <div className="menu">
-                <form onSubmit={sellSubmit}>
-                    <h3>Select stock's ID you want to sell and fill the blanks below </h3>
-                    <select className="newstock" name="idselected" onChange={handleInputChange}>
+                <form onSubmit={handleSubmit(onSubmitHandler)}>
+                    <h3 className="stocktext">Select the stock ID you want to register <br></br> your sell and fill the blanks </h3>
+                    <select className="sellid" {...register('idselected')}>
                         <option value="0" >IDs available</option>
                         {stocks.map(stock => <option key={stock.ID}>{stock.ID}</option>)}
                     </select>
                     <p></p>
-                    <input type="number" step="0.01" className="newstock" name="nmbPriceSell" placeholder="Price Sold" autoComplete="off" onChange={handleInputChange}></input>
+                    <input {...register('nmbPriceSell')} placeholder="Price Sold*" autoComplete="off" />
+                    <h4 className="error">{errors.nmbPriceSell?.message}</h4>
                     <p></p>
-                    <input type="number" step="0.01" className="newstock" name="nmbQuantitySell" placeholder="Quantity Sold" autoComplete="off" onChange={handleInputChange}></input>
+                    <input {...register('nmbQuantitySell')} placeholder="Quantity Sold*" autoComplete="off" />
+                    <h4 className="error">{errors.nmbQuantitySell?.message}</h4>
                     <p></p>
-                    <SubmitButton title="Submit"></SubmitButton>
-                    <p></p>
-                    <Link to="/calculate"><button>Calculate Profits</button></Link>
-                    <p></p>
-                    <Link to='/AddStock'><button>Add Stocks</button></Link>
-                    <p></p>
-                    <Link to="/"><button>Logout</button></Link>
+                    <SubmitButton title="Submit" />
                 </form>
+                <p></p>
+                <Link to="/calculate"><button>Calculate Profits</button></Link>
+                <p></p>
+                <Link to='/AddStock'><button>Add Stocks</button></Link>
+                <p></p>
+                <Link to="/"><button>Logout</button></Link>
             </div>
         </Fragment>
     )
